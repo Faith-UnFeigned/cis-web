@@ -1,0 +1,17 @@
+.preview {
+    font-family: "Nunito", var(--mantine-font-family);
+    padding-left: 0 !important;
+}
+
+.preview h1,
+.preview h2,
+.preview h3,
+.preview h4,
+.preview h5,
+.preview h6 {
+    margin: 0.67em 0 !important;
+}
+
+.preview p {
+    margin: 1em 0 !important;
+}
