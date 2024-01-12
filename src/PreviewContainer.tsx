@@ -7,7 +7,6 @@ import HymnPreview from './components/HymnPreview/HymnPreview';
 import { AppHeader } from './components/AppHeader/AppHeader';
 import { HymnList } from './components/HymnList/HymnList';
 import FloatingButtons from './components/FloatingButtons/FloatingButtons';
-import HymnEditor from './components/HymnEditor/HymnEditor';
 
 export type HymnMap = Record<number, Hymn>;
 const TEMP_URL =
@@ -18,7 +17,7 @@ export default function PreviewContainer() {
   const [error, setError] = useState<string | null>(null);
   const [, setOriginalHymns] = useState<Hymn[] | null>(null);
   const [editedHymns, setEditedHymns] = useState<HymnMap | null>(null);
-  const [editing, setEditing] = useState(false);
+  const [, setEditing] = useState(false);
   const [drawerOpened, { toggle, close }] = useDisclosure();
   const [fileName, setFileName] = useState('hymnal.json');
 
@@ -108,23 +107,7 @@ export default function PreviewContainer() {
         />
       </AppShell.Navbar>
       <AppShell.Main>
-        {editing ? (
-          <HymnEditor
-            currentHymn={selectedHymn}
-            updateHymn={(updater) =>
-              setEditedHymns((hymn) =>
-                hymn
-                  ? {
-                      ...hymn,
-                      [selectedHymn.number]: updater(hymn[selectedHymn.number]),
-                    }
-                  : hymn
-              )
-            }
-          />
-        ) : (
-          <HymnPreview selectedItem={selectedHymn} />
-        )}
+      <HymnPreview selectedItem={selectedHymn} />
         <FloatingButtons
           uploadAnotherFile={() => {
             setOriginalHymns(null);
