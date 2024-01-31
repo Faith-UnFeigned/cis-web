@@ -14,7 +14,7 @@ export function ColorModeProvider({ children }: { children: ReactNode }) {
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     const [colorMode, setColorMode] = useLocalStorage<"dark" | "light">({
         key: "colorMode",
-        defaultValue: prefersDarkMode ? "dark" : "light",
+        defaultValue: prefersDarkMode === true ? "light" : "dark",
     });
 
     const toggleColorMode = () => {
