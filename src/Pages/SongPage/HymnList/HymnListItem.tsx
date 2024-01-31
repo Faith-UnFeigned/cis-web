@@ -1,6 +1,7 @@
 import { List, Text, useMantineTheme } from "@mantine/core";
-import { Hymn } from "../../utils";
-import { useColorMode } from "../../Context/ColorMode";
+
+import { useColorMode } from "../../../Context/ColorMode";
+import { Hymn } from "../../../utils";
 
 export function HymnListItem({
     item,

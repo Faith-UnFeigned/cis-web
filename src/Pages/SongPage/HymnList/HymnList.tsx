@@ -1,8 +1,8 @@
 import { List } from "@mantine/core";
-import { Hymn } from "../../utils";
 import { useEffect } from "react";
 
 import { HymnListItem } from "./HymnListItem";
+import { Hymn } from "../../../utils";
 
 export function HymnList({
     error,

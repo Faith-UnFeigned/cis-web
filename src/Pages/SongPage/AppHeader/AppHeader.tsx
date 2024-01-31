@@ -7,7 +7,6 @@ import {
     ActionIcon,
     NumberInput,
 } from "@mantine/core";
-import { Hymn } from "../../utils";
 import {
     IconChevronLeft,
     IconChevronRight,
@@ -15,7 +14,8 @@ import {
 } from "@tabler/icons-react";
 
 import classes from "./AppHeader.module.css";
-import { HymnMap } from "../../PreviewContainer";
+import { Hymn } from "../../../utils";
+import { HymnMap } from "../../../PreviewContainer";
 
 export function AppHeader({
     drawerOpened,

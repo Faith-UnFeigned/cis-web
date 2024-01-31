@@ -4,7 +4,7 @@ import "@mantine/tiptap/styles.css";
 import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
-import SongPage from "./Pages/SongPage/SongPage";
+import SongPage from "./PreviewContainer";
 import { ColorModeProvider, useColorMode } from "./Context/ColorMode";
 import { Homepage } from "./Pages/Homepage/Homepage";
 
