@@ -23,7 +23,7 @@ export default function SongPage() {
         deserialize: (value) => Number(value),
     });
 
-    let { number, language } = useParams();
+    const { number, language } = useParams();
 
     useEffect(() => {
         document.body.scrollIntoView({ behavior: "smooth" });

@@ -14,7 +14,7 @@ export function HymnListItem({
 }) {
     const theme = useMantineTheme();
     const { colorMode } = useColorMode();
-    let { language } = useParams();
+    const { language } = useParams();
 
     return (
         <Link

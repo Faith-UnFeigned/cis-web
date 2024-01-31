@@ -15,7 +15,7 @@ export function HymnList({
     selectedItem: number | null;
     handleItemClick: (hymnNumber: number) => void;
 }) {
-    let [filterText, setFilterText] = useState("");
+    const [filterText, setFilterText] = useState("");
 
     useEffect(() => {
         const listItem = document.getElementById("hymn-" + selectedItem);
@@ -26,7 +26,7 @@ export function HymnList({
 
     const regex = new RegExp(filterText, "i");
 
-    let filteredList =
+    const filteredList =
         filterText.trim() !== ""
             ? list.filter(
                   (hymn) =>

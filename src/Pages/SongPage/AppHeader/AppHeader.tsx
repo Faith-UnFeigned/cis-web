@@ -42,7 +42,7 @@ export function AppHeader({
     currentLanguage: string;
     resetHymnalData: () => void;
 }) {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const navigateToSong = (song: number) =>
         navigate(`/songs/${currentLanguage}/${song}`);
@@ -146,7 +146,7 @@ function LanguageSelector({
     resetHymnalData: () => void;
 }) {
     const [opened, { open, close }] = useDisclosure(false);
-    let [filterText, setFilterText] = useState("");
+    const [filterText, setFilterText] = useState("");
 
     const searchRegex = new RegExp(filterText, "i");
 

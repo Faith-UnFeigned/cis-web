@@ -18,7 +18,8 @@ export default function HymnPreview({
     selectedItem?: Hymn;
     textSize: number;
 }) {
-    let { language } = useParams();
+    const { language } = useParams();
+
     useDocumentTitle(
         `${selectedItem?.title} | ${
             HYMNALS_CONFIG.find((value) => value.key === language)?.title ||
