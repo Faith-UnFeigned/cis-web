@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { AppShell } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { Hymn, getFilenameFromResponse, downloadJsonFile } from "./utils";
-import { AppHeader } from "./Pages/SongPage/AppHeader/AppHeader";
-import FloatingButtons from "./Pages/SongPage/FloatingButtons/FloatingButtons";
-import { HymnList } from "./Pages/SongPage/HymnList/HymnList";
-import HymnPreview from "./Pages/SongPage/HymnPreview/HymnPreview";
+import { Hymn, getFilenameFromResponse, downloadJsonFile } from "../../utils";
+import { AppHeader } from "./AppHeader/AppHeader";
+import FloatingButtons from "./FloatingButtons/FloatingButtons";
+import { HymnList } from "./HymnList/HymnList";
+import HymnPreview from "./HymnPreview/HymnPreview";
 
 export type HymnMap = Record<number, Hymn>;
 const TEMP_URL =

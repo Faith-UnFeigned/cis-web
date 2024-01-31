@@ -15,7 +15,7 @@ import {
 
 import classes from "./AppHeader.module.css";
 import { Hymn } from "../../../utils";
-import { HymnMap } from "../../../PreviewContainer";
+import { HymnMap } from "../SongPage";
 
 export function AppHeader({
     drawerOpened,
