@@ -1,32 +1,36 @@
 import { useCallback, useEffect, useState } from "react";
-import { AppShell } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { Hymn, getFilenameFromResponse, downloadJsonFile } from "../../utils";
+import { Alert, AppShell, LoadingOverlay } from "@mantine/core";
+import { useDisclosure, useLocalStorage } from "@mantine/hooks";
+import { useParams } from "react-router-dom";
+
+import { Hymn } from "../../utils";
 import { AppHeader } from "./AppHeader/AppHeader";
+import { getHymnalFileUrl } from "../../data/hymnalsConfig";
+import HymnPreview from "./HymnPreview/HymnPreview";
 import FloatingButtons from "./FloatingButtons/FloatingButtons";
 import { HymnList } from "./HymnList/HymnList";
-import HymnPreview from "./HymnPreview/HymnPreview";
+import { IconInfoCircle } from "@tabler/icons-react";
 
 export type HymnMap = Record<number, Hymn>;
-const TEMP_URL =
-    "https://raw.githubusercontent.com/TinasheMzondiwa/cis-hymnals/main/english.json";
 
-export default function PreviewContainer() {
-    const [selectedItem, setSelectedItem] = useState<number>(1);
+export default function SongPage() {
     const [error, setError] = useState<string | null>(null);
-    const [, setOriginalHymns] = useState<Hymn[] | null>(null);
-    const [editedHymns, setEditedHymns] = useState<HymnMap | null>(null);
-    const [, setEditing] = useState(false);
+    const [hymns, setHymns] = useState<HymnMap | null>(null);
     const [drawerOpened, { toggle, close }] = useDisclosure();
-    const [fileName, setFileName] = useState("hymnal.json");
+    const [textSize, setTextSize] = useLocalStorage({
+        key: "textSize",
+        defaultValue: 1.2,
+        deserialize: (value) => Number(value),
+    });
+
+    let { number, language } = useParams();
 
     useEffect(() => {
         document.body.scrollIntoView({ behavior: "smooth" });
-    }, [selectedItem]);
+    }, [number]);
 
-    const handleLoadedData = (jsonData: Hymn[], fileName: string) => {
-        setOriginalHymns(jsonData);
-        setEditedHymns(
+    const handleLoadedData = (jsonData: Hymn[]) => {
+        setHymns(
             jsonData.reduce(
                 (accumulator, current) => ({
                     ...accumulator,
@@ -35,9 +39,7 @@ export default function PreviewContainer() {
                 {}
             )
         );
-        setSelectedItem(jsonData[0].number);
         setError(null);
-        setFileName(fileName);
     };
 
     const handleFetchData = useCallback(async (url: string) => {
@@ -47,36 +49,41 @@ export default function PreviewContainer() {
                 throw new Error("Error fetching data.");
             }
             const jsonData: Hymn[] = await response.json();
-            handleLoadedData(
-                jsonData,
-                getFilenameFromResponse(response, "hymnal.json")
-            );
+            handleLoadedData(jsonData);
         } catch (error) {
             console.error("Error fetching JSON data:", error);
-            setError(error as string);
-            open();
+            setError((error as Error).toString());
         } finally {
             console.log("Done fetching data.");
         }
     }, []);
 
-    //   This is temporal
     useEffect(() => {
-        if (!editedHymns) {
-            handleFetchData(TEMP_URL);
+        if (language) {
+            handleFetchData(getHymnalFileUrl(language));
         }
-    }, [editedHymns, handleFetchData]);
+    }, [handleFetchData, language]);
 
-    const handleItemClick = (hymnNumber: number) => {
-        close();
-        setSelectedItem(hymnNumber);
-    };
-
-    if (!editedHymns) {
-        return null;
+    if (!hymns) {
+        return error ? (
+            <Alert
+                variant="light"
+                color="red"
+                title="Failed to load"
+                icon={<IconInfoCircle />}
+            >
+                <div>An error occured while attempting to load the hymnal:</div>
+                <div>{error}</div>
+            </Alert>
+        ) : (
+            <LoadingOverlay
+                visible
+                loaderProps={{ size: "lg", color: "#0aaa5e" }}
+            />
+        );
     }
 
-    const selectedHymn = editedHymns?.[selectedItem];
+    const selectedHymn = hymns?.[Number(number)];
 
     return (
         <AppShell
@@ -92,35 +99,24 @@ export default function PreviewContainer() {
                 drawerOpened={drawerOpened}
                 toggle={toggle}
                 selectedHymn={selectedHymn}
-                hymns={editedHymns}
-                toggleEditing={() => setEditing((value) => !value)}
-                setSelectedItem={setSelectedItem}
-                selectedItem={selectedItem}
+                selectedItem={Number(number)}
+                currentLanguage={language || "english"}
+                hymns={hymns}
+                resetHymnalData={() => setHymns(null)}
             />
             <AppShell.Navbar p="md" style={{ overflow: "scroll" }}>
                 <HymnList
                     error={error}
-                    list={Object.values(editedHymns)}
-                    selectedItem={selectedItem}
-                    handleItemClick={handleItemClick}
+                    list={Object.values(hymns)}
+                    selectedItem={Number(number)}
+                    handleItemClick={() => close()}
                 />
             </AppShell.Navbar>
             <AppShell.Main>
-                <HymnPreview selectedItem={selectedHymn} />
+                <HymnPreview selectedItem={selectedHymn} textSize={textSize} />
                 <FloatingButtons
-                    uploadAnotherFile={() => {
-                        setOriginalHymns(null);
-                        setSelectedItem(1);
-                        setEditedHymns(null);
-                    }}
-                    downloadJson={() =>
-                        downloadJsonFile(
-                            Object.values(editedHymns).sort(
-                                (a, b) => a.number - b.number
-                            ),
-                            fileName
-                        )
-                    }
+                    textSize={textSize}
+                    setTextSize={setTextSize}
                 />
             </AppShell.Main>
         </AppShell>

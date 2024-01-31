@@ -1,8 +1,8 @@
-import { List } from "@mantine/core";
-import { useEffect } from "react";
+import { List, Space, TextInput } from "@mantine/core";
+import { Hymn } from "../../../utils";
+import { useEffect, useState } from "react";
 
 import { HymnListItem } from "./HymnListItem";
-import { Hymn } from "../../../utils";
 
 export function HymnList({
     error,
@@ -15,6 +15,8 @@ export function HymnList({
     selectedItem: number | null;
     handleItemClick: (hymnNumber: number) => void;
 }) {
+    let [filterText, setFilterText] = useState("");
+
     useEffect(() => {
         const listItem = document.getElementById("hymn-" + selectedItem);
         if (listItem) {
@@ -22,10 +24,31 @@ export function HymnList({
         }
     }, [selectedItem]);
 
+    const regex = new RegExp(filterText, "i");
+
+    let filteredList =
+        filterText.trim() !== ""
+            ? list.filter(
+                  (hymn) =>
+                      hymn.content?.match(regex) ||
+                      hymn.markdown?.match(regex) ||
+                      hymn.title.match(regex) ||
+                      hymn.number.toString().match(regex)
+              )
+            : list;
+
     return (
         <List listStyleType="none" withPadding>
+            <TextInput
+                type="search"
+                placeholder="Search songs"
+                onInput={(e) =>
+                    setFilterText((e.target as HTMLInputElement).value)
+                }
+            />
+            <Space style={{ height: "0.7em" }} />
             {!error &&
-                list?.map((item) => (
+                filteredList?.map((item) => (
                     <HymnListItem
                         key={item.number}
                         item={item}
