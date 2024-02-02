@@ -1,22 +1,19 @@
-import { ActionIcon, Affix, Menu, rem } from "@mantine/core";
+import { ActionIcon, Affix, Menu, Slider, rem } from "@mantine/core";
 import {
     IconAdjustmentsHorizontal,
-    IconDownload,
-    // IconGitCompare,
     IconMoon,
     IconSun,
-    IconUpload,
 } from "@tabler/icons-react";
 
 import classes from "./FloatingButtons.module.css";
-import { useColorMode } from "../../Context/ColorMode";
+import { useColorMode } from "../../../Context/ColorMode";
 
 export default function FloatingButtons({
-    uploadAnotherFile,
-    downloadJson,
+    textSize,
+    setTextSize,
 }: {
-    uploadAnotherFile: () => void;
-    downloadJson: () => void;
+    textSize: number;
+    setTextSize: (val: number) => void;
 }) {
     const { colorMode, toggleColorMode } = useColorMode();
 
@@ -55,34 +52,34 @@ export default function FloatingButtons({
                     >
                         {colorMode === "light" ? "Dark mode" : "Light mode"}
                     </Menu.Item>
-                    <Menu.Item
-                        leftSection={
-                            <IconDownload
-                                style={{ width: rem(14), height: rem(14) }}
+                    <Menu.Item>
+                        <div style={{ width: 200, height: 35 }}>
+                            <Slider
+                                value={textSize}
+                                onChange={(size) => setTextSize(size)}
+                                min={0.8}
+                                max={2.0}
+                                step={0.1}
+                                marks={[
+                                    {
+                                        value: 0.8,
+                                        label: (
+                                            <b style={{ fontSize: "0.7em" }}>
+                                                A
+                                            </b>
+                                        ),
+                                    },
+                                    {
+                                        value: 2,
+                                        label: (
+                                            <b style={{ fontSize: "1.2em" }}>
+                                                A
+                                            </b>
+                                        ),
+                                    },
+                                ]}
                             />
-                        }
-                        onClick={downloadJson}
-                    >
-                        Download JSON
-                    </Menu.Item>
-                    {/* <Menu.Item
-                        leftSection={
-                            <IconGitCompare
-                                style={{ width: rem(14), height: rem(14) }}
-                            />
-                        }
-                    >
-                        Compare changes
-                    </Menu.Item> */}
-                    <Menu.Item
-                        leftSection={
-                            <IconUpload
-                                style={{ width: rem(14), height: rem(14) }}
-                            />
-                        }
-                        onClick={uploadAnotherFile}
-                    >
-                        Upload another file
+                        </div>
                     </Menu.Item>
                 </Menu.Dropdown>
             </Menu>

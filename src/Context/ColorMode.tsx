@@ -1,11 +1,5 @@
-import { useMediaQuery } from "@mantine/hooks";
-import {
-    createContext,
-    useContext,
-    useState,
-    ReactNode,
-    useEffect,
-} from "react";
+import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
+import { createContext, useContext, ReactNode } from "react";
 
 type ColorModeContextType = {
     colorMode: "dark" | "light";
@@ -18,19 +12,16 @@ const ColorModeContext = createContext<ColorModeContextType | undefined>(
 
 export function ColorModeProvider({ children }: { children: ReactNode }) {
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-    const [colorMode, setColorMode] = useState<"dark" | "light">(
-        prefersDarkMode ? "dark" : "light"
-    );
+    const [colorMode, setColorMode] = useLocalStorage<"dark" | "light">({
+        key: "colorMode",
+        defaultValue: prefersDarkMode === true ? "light" : "dark",
+    });
 
     const toggleColorMode = () => {
         setColorMode((prevScheme) =>
             prevScheme === "light" ? "dark" : "light"
         );
     };
-
-    useEffect(() => {
-        setColorMode(prefersDarkMode ? "dark" : "light");
-    }, [prefersDarkMode]);
 
     const contextValue: ColorModeContextType = {
         colorMode,

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg width="1920" height="1280" viewBox="0 0 507.99998 338.66666" version="1.1" id="svg1" xml:space="preserve"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+   <defs id="defs1">
+      <filter style="color-interpolation-filters:sRGB" id="filter3" x="-0.35303545" y="-0.35303545" width="1.7060709"
+         height="1.7060709">
+         <feGaussianBlur stdDeviation="37.362917" id="feGaussianBlur3" />
+      </filter>
+      <filter style="color-interpolation-filters:sRGB" id="filter4" x="-0.32361538" y="-0.32361538" width="1.6472308"
+         height="1.6472308">
+         <feGaussianBlur stdDeviation="34.249293" id="feGaussianBlur4" />
+      </filter>
+      <filter style="color-interpolation-filters:sRGB" id="filter5" x="-0.4621338" y="-0.4621338" width="1.9242676"
+         height="1.9242676">
+         <feGaussianBlur stdDeviation="48.909161" id="feGaussianBlur5" />
+      </filter>
+      <filter style="color-interpolation-filters:sRGB" id="filter6" x="-0.32361538" y="-0.32361538" width="1.6472308"
+         height="1.6472308">
+         <feGaussianBlur stdDeviation="34.249293" id="feGaussianBlur6" />
+      </filter>
+      <clipPath clipPathUnits="userSpaceOnUse" id="clipPath191">
+         <rect style="fill:#880076;fill-opacity:1;stroke:none;stroke-width:0.894506;stroke-linecap:round" id="rect191"
+            width="454.40933" height="302.93954" x="26.795338" y="590.97449" />
+      </clipPath>
+   </defs>
+   <rect style="fill:#1e1f23;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round" id="rect208" width="508"
+      height="338.66666" x="0" y="-3.5742187e-06" />
+   <circle
+      style="mix-blend-mode:normal;fill:#3eb0e0;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;filter:url(#filter4);opacity:0.5"
+      id="circle208" cx="330.29483" cy="80.392273" r="127" />
+   <circle
+      style="mix-blend-mode:normal;fill:#0aaa5e;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;filter:url(#filter6);opacity:0.5"
+      id="circle209" cx="439.83206" cy="235.43771" r="127" />
+   <circle
+      style="mix-blend-mode:normal;fill:#f6b723;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;filter:url(#filter5);opacity:0.5"
+      id="circle210" cx="433.48196" cy="80.392227" r="127"
+      transform="matrix(1.0392509,0,0,1.0392509,4.044598,-26.86045)" />
+   <circle
+      style="mix-blend-mode:normal;fill:#f6b723;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;filter:url(#filter3);opacity:0.5"
+      id="circle211" cx="360.89325" cy="328.08316" r="127"
+      transform="matrix(0.86592582,0,0,0.86592582,15.030065,53.00222)" />
+</svg>

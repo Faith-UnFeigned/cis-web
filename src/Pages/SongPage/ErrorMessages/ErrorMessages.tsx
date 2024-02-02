@@ -1,6 +1,7 @@
 import { Alert, Code } from "@mantine/core";
-import { Hymn } from "../../utils";
 import { IconInfoCircle } from "@tabler/icons-react";
+
+import { Hymn } from "../../../utils";
 
 export function InvalidHymnMessage({ selectedHymn }: { selectedHymn: Hymn }) {
     return (
@@ -11,7 +12,7 @@ export function InvalidHymnMessage({ selectedHymn }: { selectedHymn: Hymn }) {
             icon={<IconInfoCircle />}
         >
             This hymn (number {selectedHymn.number}) does not have a valid{" "}
-            <Code>markdown</Code> or <Code>content</Code> key
+            <Code>markdown</Code> or <Code>content</Code> value
         </Alert>
     );
 }
@@ -24,7 +25,7 @@ export function NoHymnMessage() {
             title="No hymn selected"
             icon={<IconInfoCircle />}
         >
-            There is no hymn with the selected number
+            There is no hymn with the selected number in this hymnal
         </Alert>
     );
 }

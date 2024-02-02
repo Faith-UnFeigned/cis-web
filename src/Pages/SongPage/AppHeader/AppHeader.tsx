@@ -7,36 +7,39 @@ import {
     ActionIcon,
     NumberInput,
 } from "@mantine/core";
-import { Hymn } from "../../utils";
-import {
-    IconChevronLeft,
-    IconChevronRight,
-    IconPencil,
-} from "@tabler/icons-react";
+import { Hymn } from "../../../utils";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 import classes from "./AppHeader.module.css";
-import { HymnMap } from "../../PreviewContainer";
+import { HymnMap } from "../SongPage";
+import { useNavigate } from "react-router-dom";
+import { LanguageSelector } from "./LanguageSelector";
 
 export function AppHeader({
     drawerOpened,
     toggle,
-    selectedHymn,
     hymns,
-    toggleEditing,
-    setSelectedItem,
     selectedItem,
+    currentLanguage,
+    selectedHymn,
+    resetHymnalData,
 }: {
     drawerOpened: boolean;
     toggle: () => void;
     selectedHymn: Hymn | undefined;
     hymns: HymnMap;
-    toggleEditing: () => void;
-    setSelectedItem: React.Dispatch<React.SetStateAction<number>>;
     selectedItem: number | null;
+    currentLanguage: string;
+    resetHymnalData: () => void;
 }) {
+    const navigate = useNavigate();
+
+    const navigateToSong = (song: number) =>
+        navigate(`/songs/${currentLanguage}/${song}`);
+
     const previousHymn = () => {
         if (selectedItem && hymns[selectedItem - 1]) {
-            setSelectedItem(selectedItem - 1);
+            navigateToSong(selectedItem - 1);
         }
     };
 
@@ -44,13 +47,13 @@ export function AppHeader({
         const text = (event.target as HTMLInputElement).value;
         const value = Number(text);
         if (!Number.isNaN(value) && text.trim() !== "") {
-            setSelectedItem(value);
+            navigateToSong(value);
         }
     };
 
     const nextHymn = () => {
         if (selectedItem && hymns[selectedItem + 1]) {
-            setSelectedItem(selectedItem + 1);
+            navigateToSong(selectedItem + 1);
         }
     };
 
@@ -115,15 +118,10 @@ export function AppHeader({
                 </Group>
 
                 <Group>
-                    <Tooltip label="Toggle editing">
-                        <ActionIcon
-                            size={35}
-                            variant="default"
-                            onClick={toggleEditing}
-                        >
-                            <IconPencil />
-                        </ActionIcon>
-                    </Tooltip>
+                    <LanguageSelector
+                        selectedItem={selectedItem}
+                        resetHymnalData={resetHymnalData}
+                    />
                 </Group>
             </Group>
         </AppShell.Header>
