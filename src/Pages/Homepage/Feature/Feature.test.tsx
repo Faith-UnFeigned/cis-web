@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { test } from 'vitest';
 import { Feature } from './Feature';
-import { MockColorModeProvider } from '../../../Context/ColorModeMock'; // Assuming you have this mock provider
+import { MockColorModeProvider } from '../../../Context/ColorModeMock';
 
 test('Feature', () => {
   render(
@@ -13,6 +13,4 @@ test('Feature', () => {
   expect(screen.getByText('Test Title')).toBeInTheDocument();
   expect(screen.getByText('Test Subtext')).toBeInTheDocument();
   expect(screen.getByText('Icon')).toBeInTheDocument();
-
-  // Add more tests as needed
 });
