@@ -1,6 +1,6 @@
 ## Demo
 
-coming soon
+[https://christinsong.app/](https://christinsong.app/)
 
 ## Run Locally
 
@@ -27,7 +27,6 @@ Start the dev server
 ```bash
   npm run dev
 ```
-
 
 ## Features
 
