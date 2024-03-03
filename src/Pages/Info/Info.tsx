@@ -60,7 +60,7 @@ export default function InfoPage() {
                             className={styles.item}
                             onClick={() =>
                                 navigator.share({
-                                    url: window.location.href,
+                                    url: window.location.origin,
                                     title: "Christ in Song on the Web",
                                 })
                             }
