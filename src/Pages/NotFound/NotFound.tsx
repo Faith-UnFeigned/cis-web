@@ -7,7 +7,7 @@ import { useDocumentTitle } from "@mantine/hooks";
 export default function NotFound() {
     useDocumentTitle("404 - Not found");
 
-    let theme = useMantineTheme();
+    const theme = useMantineTheme();
 
     return (
         <Box

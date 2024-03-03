@@ -15,7 +15,7 @@ import { useDocumentTitle } from "@mantine/hooks";
 export default function InfoPage() {
     useDocumentTitle("Info | Christ in Song on the Web");
 
-    let { colorMode } = useColorMode();
+    const { colorMode } = useColorMode();
 
     return (
         <Container className={styles.container}>

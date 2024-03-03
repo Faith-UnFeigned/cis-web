@@ -3,7 +3,7 @@ import { useColorMode } from "../../Context/ColorMode";
 import { IconMoon, IconSun } from "@tabler/icons-react";
 
 export function FLoatingColorModeButton() {
-    let { colorMode, toggleColorMode } = useColorMode();
+    const { colorMode, toggleColorMode } = useColorMode();
 
     return (
         <Affix

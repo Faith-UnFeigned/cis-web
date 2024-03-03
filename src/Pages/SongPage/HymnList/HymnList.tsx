@@ -56,11 +56,11 @@ export function HymnList({
             const titleRegex = /^\s*\d*\.?:?\s*-?\s*’?‘?'?"?“?¿?¡?(.+)$/;
 
             result.sort((a, b) => {
-                let arrayA = titleRegex.exec(a.title);
-                let titleA = arrayA ? arrayA[1] : a.title;
+                const arrayA = titleRegex.exec(a.title);
+                const titleA = arrayA ? arrayA[1] : a.title;
 
-                let arrayB = titleRegex.exec(b.title);
-                let titleB = arrayB ? arrayB[1] : b.title;
+                const arrayB = titleRegex.exec(b.title);
+                const titleB = arrayB ? arrayB[1] : b.title;
 
                 return titleA > titleB ? 1 : -1;
             });
