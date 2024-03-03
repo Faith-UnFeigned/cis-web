@@ -1,9 +1,8 @@
-import { Divider, NavLink, useMantineTheme } from "@mantine/core";
+import { NavLink, useMantineTheme } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "@mantine/hooks";
 import {
     IconArrowsMove,
-    IconBrandGithub,
     IconDeviceMobile,
     IconLanguage,
     IconSearch,
@@ -13,6 +12,7 @@ import styles from "./Homepage.module.scss";
 import { HYMNALS_CONFIG } from "../../data/hymnalsConfig";
 import { useColorMode } from "../../Context/ColorMode";
 import { Feature } from "./Feature/Feature";
+import { Footer } from "../../Components/Footer/Footer";
 
 export function Homepage() {
     useDocumentTitle("Christ in Song on the Web");
@@ -89,21 +89,7 @@ export function Homepage() {
                     </div>
                 </div>
             </section>
-            <Divider className={styles.divider} />
-            <footer>
-                <div className={styles.footerContents}>
-                    <p>Made with ♥ by Faith Unfeigned</p>
-                    <div className={styles.icons}>
-                        <a
-                            href="https://github.com/Faith-UnFeigned/cis-web"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <IconBrandGithub />
-                        </a>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }

@@ -1,0 +1,38 @@
+.divider {
+    max-width: 1000px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    .footer-contents {
+        padding: 2em 1em;
+        max-width: 1000px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        .links {
+            // opacity: 0.5;
+            margin-bottom: 1em;
+
+            *+* {
+                margin-left: 0.7em;
+            }
+        }
+
+        @media screen and (min-width: 800px) {
+            flex-direction: row;
+        }
+
+        @media screen and (max-width: 800px) {
+            text-align: center;
+        }
+    }
+}
