@@ -13,6 +13,7 @@ import { HYMNALS_CONFIG } from "../../data/hymnalsConfig";
 import { useColorMode } from "../../Context/ColorMode";
 import { Feature } from "./Feature/Feature";
 import { Footer } from "../../Components/Footer/Footer";
+import { FLoatingColorModeButton } from "../../Components/FLoatingColorModeButton/FLoatingColorModeButton";
 
 export function Homepage() {
     useDocumentTitle("Christ in Song on the Web");
@@ -68,7 +69,7 @@ export function Homepage() {
                     <div className={styles.featuresList}>
                         <Feature
                             icon={<IconLanguage />}
-                            title="Multiple Language Support"
+                            title="Multiple Hymnal Versions"
                             subtext="Access hymnals in various languages"
                         />
                         <Feature
@@ -90,6 +91,7 @@ export function Homepage() {
                 </div>
             </section>
             <Footer />
+            <FLoatingColorModeButton />
         </div>
     );
 }
