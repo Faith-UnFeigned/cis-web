@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Alert, AppShell, LoadingOverlay } from "@mantine/core";
+import { Alert, AppShell, Button, LoadingOverlay } from "@mantine/core";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { useParams } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import { getHymnalFileUrl } from "../../data/hymnalsConfig";
 import HymnPreview from "./HymnPreview/HymnPreview";
 import FloatingButtons from "./FloatingButtons/FloatingButtons";
 import { HymnList } from "./HymnList/HymnList";
-import { IconInfoCircle } from "@tabler/icons-react";
+import { IconInfoCircle, IconReload } from "@tabler/icons-react";
 
 export type HymnMap = Record<number, Hymn>;
 
@@ -74,6 +74,18 @@ export default function SongPage() {
             >
                 <div>An error occured while attempting to load the hymnal:</div>
                 <div>{error}</div>
+                <p>
+                    <Button
+                        onClick={() => {
+                            if (language) {
+                                setError(null);
+                                handleFetchData(getHymnalFileUrl(language));
+                            }
+                        }}
+                    >
+                        <IconReload /> Reload
+                    </Button>
+                </p>
             </Alert>
         ) : (
             <LoadingOverlay
@@ -83,7 +95,7 @@ export default function SongPage() {
         );
     }
 
-    const selectedHymn = hymns?.[Number(number)];
+    const selectedHymn = hymns[Number(number)];
 
     return (
         <AppShell
