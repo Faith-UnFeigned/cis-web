@@ -10,6 +10,8 @@
 
 
     .footer-contents {
+        border-top:
+            calc(0.0625rem * var(--mantine-scale)) var(--divider-color) solid;
         padding: 2em 1em;
         max-width: 1000px;
         width: 100%;
@@ -19,8 +21,12 @@
         justify-content: space-between;
 
         .links {
-            // opacity: 0.5;
+            color: grey;
             margin-bottom: 1em;
+
+            a:hover {
+                text-decoration: underline;
+            }
 
             *+* {
                 margin-left: 0.7em;
@@ -35,4 +41,12 @@
             text-align: center;
         }
     }
+}
+
+[data-mantine-color-scheme="dark"] .footer-contents {
+    --divider-color: var(--mantine-color-dark-4);
+}
+
+[data-mantine-color-scheme="light"] .footer-contents {
+    --divider-color: var(--mantine-color-gray-3);
 }
