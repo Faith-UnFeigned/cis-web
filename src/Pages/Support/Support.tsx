@@ -17,6 +17,15 @@ export default function SupportPage() {
                     If you find this web app useful, please consider supporting
                     us with a donation
                 </div>
+                <p>
+                    <a
+                        className={styles.paypal}
+                        href="https://www.paypal.com/paypalme/TinasheMzondiwa"
+                        target="_blank"
+                    >
+                        <img src="/images/PayPal.svg" alt="" />
+                    </a>
+                </p>
                 <p className={styles.disclaimer}>
                     A One-time Donation or a Monthly Donation is not required to
                     access any feature of this web app, All features are

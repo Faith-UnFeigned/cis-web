@@ -29,9 +29,22 @@
 
         .subtext {}
 
+        .paypal {
+            background-color: #fec640;
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 13px 70px;
+            border-radius: 50px;
+            margin: 20px;
+
+            img {
+                height: 30px;
+            }
+        }
+
         .disclaimer {
-            font-size: 0.7em;
-            margin-top: 3em;
+            font-size: 0.8em;
         }
     }
 }
