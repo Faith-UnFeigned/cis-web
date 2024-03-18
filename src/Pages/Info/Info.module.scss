@@ -1,0 +1,65 @@
+.container {
+    font-family: "Sora", Verdana, Geneva, Tahoma, sans-serif;
+    padding: 1em 2em;
+
+    h1 {
+        position: relative;
+
+        &::after {
+            display: block;
+            content: "";
+            width: 35px;
+            height: 5px;
+            background-color: #CD9B1D;
+        }
+    }
+
+    .main {
+        text-align: center;
+        padding: 2em 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .items {
+            border: 0.5px solid;
+            border-radius: 0.5em;
+            max-height: 70vh;
+            overflow-y: scroll;
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+
+            .item {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 1em;
+                border: inherit;
+
+                .icon {
+                    height: 24px;
+                    margin-right: 1em;
+                }
+
+                &:first-child {
+                    border-top-right-radius: 0.5em;
+                    border-top-left-radius: 0.5em;
+                }
+
+                &:last-child {
+                    border-bottom-right-radius: 0.5em;
+                    border-bottom-left-radius: 0.5em;
+                }
+            }
+
+            div.item {
+                cursor: pointer;
+            }
+        }
+
+        p {
+            margin: 0.5em 0;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
+import { useLocalStorage } from "@mantine/hooks";
 import { createContext, useContext, ReactNode } from "react";
 
 type ColorModeContextType = {
@@ -11,10 +11,11 @@ const ColorModeContext = createContext<ColorModeContextType | undefined>(
 );
 
 export function ColorModeProvider({ children }: { children: ReactNode }) {
-    const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     const [colorMode, setColorMode] = useLocalStorage<"dark" | "light">({
         key: "colorMode",
-        defaultValue: prefersDarkMode === true ? "light" : "dark",
+        defaultValue: window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light",
     });
 
     const toggleColorMode = () => {
