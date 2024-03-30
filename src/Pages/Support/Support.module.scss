@@ -1,0 +1,50 @@
+.container {
+    font-family: "Sora", Verdana, Geneva, Tahoma, sans-serif;
+    padding: 1em 2em;
+
+    h1 {
+        position: relative;
+
+        &::after {
+            display: block;
+            content: "";
+            width: 35px;
+            height: 5px;
+            background-color: #CD9B1D;
+        }
+    }
+
+    .main {
+        text-align: center;
+        padding: 2em 0;
+
+        img {
+            max-width: 300px;
+            width: 100%;
+        }
+
+        h2 {
+            margin-bottom: 0;
+        }
+
+        .subtext {}
+
+        .paypal {
+            background-color: #fec640;
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 13px 70px;
+            border-radius: 50px;
+            margin: 20px;
+
+            img {
+                height: 30px;
+            }
+        }
+
+        .disclaimer {
+            font-size: 0.8em;
+        }
+    }
+}

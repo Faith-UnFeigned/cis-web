@@ -1,8 +1,12 @@
-import { List, Space, TextInput } from "@mantine/core";
-import { Hymn } from "../../../utils";
+import { List, Select, Space, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { useLocalStorage } from "@mantine/hooks";
 
+import styles from "./HymnList.module.scss";
 import { HymnListItem } from "./HymnListItem";
+import { Hymn } from "../../../utils";
+
+type SortOrderOption = "number" | "alphabetically";
 
 export function HymnList({
     error,
@@ -16,6 +20,11 @@ export function HymnList({
     handleItemClick: (hymnNumber: number) => void;
 }) {
     const [filterText, setFilterText] = useState("");
+    const [sortOrder, setSortOrder] = useLocalStorage<SortOrderOption>({
+        key: "hymnListSortOrder",
+        defaultValue: "number",
+    });
+    const [listToDisplay, setListToDisplay] = useState(list);
 
     useEffect(() => {
         const listItem = document.getElementById("hymn-" + selectedItem);
@@ -24,18 +33,41 @@ export function HymnList({
         }
     }, [selectedItem]);
 
-    const regex = new RegExp(filterText, "i");
+    useEffect(() => {
+        let result = [...list];
 
-    const filteredList =
-        filterText.trim() !== ""
-            ? list.filter(
-                  (hymn) =>
-                      hymn.content?.match(regex) ||
-                      hymn.markdown?.match(regex) ||
-                      hymn.title.match(regex) ||
-                      hymn.number.toString().match(regex)
-              )
-            : list;
+        if (filterText.trim() !== "") {
+            const regex = new RegExp(filterText, "i");
+
+            result = list.filter(
+                (hymn) =>
+                    hymn.content?.match(regex) ||
+                    hymn.markdown?.match(regex) ||
+                    hymn.title.match(regex) ||
+                    hymn.number.toString().match(regex)
+            );
+        }
+
+        if (sortOrder === "alphabetically") {
+            /**
+             * This RegEx is used to extract the text in a hymn's title, since the
+             * titles in the various hymnal files are written in differing formats
+             */
+            const titleRegex = /^\s*\d*\.?:?\s*-?\s*’?‘?'?"?“?¿?¡?(.+)$/;
+
+            result.sort((a, b) => {
+                const arrayA = titleRegex.exec(a.title);
+                const titleA = arrayA ? arrayA[1] : a.title;
+
+                const arrayB = titleRegex.exec(b.title);
+                const titleB = arrayB ? arrayB[1] : b.title;
+
+                return titleA > titleB ? 1 : -1;
+            });
+        }
+
+        setListToDisplay(result);
+    }, [sortOrder, filterText, list]);
 
     return (
         <List listStyleType="none" withPadding>
@@ -46,9 +78,34 @@ export function HymnList({
                     setFilterText((e.target as HTMLInputElement).value)
                 }
             />
-            <Space style={{ height: "0.7em" }} />
+            <Space style={{ height: "1em" }} />
+            <label className={styles.sortOrderLabel}>
+                Sort:&nbsp;&nbsp;
+                <Select
+                    style={{
+                        width: 160,
+                    }}
+                    value={sortOrder}
+                    onChange={(value) =>
+                        value && setSortOrder(value as SortOrderOption)
+                    }
+                    variant="unstyled"
+                    placeholder="Sort order"
+                    data={[
+                        {
+                            value: "number",
+                            label: "By hymn number",
+                        },
+                        {
+                            value: "alphabetically",
+                            label: "Alphabetically",
+                        },
+                    ]}
+                />
+            </label>
+            <Space style={{ height: "1em" }} />
             {!error &&
-                filteredList?.map((item) => (
+                listToDisplay?.map((item) => (
                     <HymnListItem
                         key={item.number}
                         item={item}

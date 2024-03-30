@@ -1,9 +1,11 @@
 import { ActionIcon, Affix, Menu, Slider, rem } from "@mantine/core";
 import {
     IconAdjustmentsHorizontal,
+    IconHome,
     IconMoon,
     IconSun,
 } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 import classes from "./FloatingButtons.module.css";
 import { useColorMode } from "../../../Context/ColorMode";
@@ -20,8 +22,18 @@ export default function FloatingButtons({
     return (
         <Affix
             position={{ bottom: 20, right: 20 }}
+            display="flex"
+            style={{
+                flexDirection: "column",
+            }}
             className={classes.container}
         >
+            <Link to={"/"} style={{ marginBottom: "1em" }}>
+                <ActionIcon size={50} variant="default">
+                    <IconHome />
+                </ActionIcon>
+            </Link>
+
             <Menu
                 trigger="click-hover"
                 openDelay={100}
