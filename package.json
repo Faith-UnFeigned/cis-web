@@ -15,16 +15,12 @@
     "@mantine/hooks": "^7.3.2",
     "@mantine/tiptap": "^7.3.2",
     "@tabler/icons-react": "^3.0.0",
-    "@tiptap/extension-color": "^2.1.13",
     "@tiptap/extension-link": "^2.1.13",
-    "@tiptap/extension-text-style": "^2.1.13",
     "@tiptap/react": "^2.1.13",
-    "@tiptap/starter-kit": "^2.1.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.0",
-    "react-router-dom": "^6.21.3",
-    "tiptap-markdown": "^0.8.8"
+    "react-router-dom": "^6.21.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.45",
