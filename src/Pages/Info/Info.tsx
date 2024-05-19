@@ -5,6 +5,7 @@ import { Footer } from "../../Components/Footer/Footer";
 import { useColorMode } from "../../Context/ColorMode";
 import { FLoatingColorModeButton } from "../../Components/FLoatingColorModeButton/FLoatingColorModeButton";
 import {
+    IconBrandAppstore,
     IconBrandGithub,
     IconBrandGooglePlay,
     IconHelp,
@@ -79,7 +80,17 @@ export default function InfoPage() {
                         <span className={styles.icon}>
                             <IconBrandGooglePlay />
                         </span>
-                        Visit the Mobile App
+                        Download the Android App
+                    </a>
+                    <a
+                        href="https://apps.apple.com/ca/app/christ-in-song-multi-language/id1067718185"
+                        target="_blank"
+                        className={styles.item}
+                    >
+                        <span className={styles.icon}>
+                            <IconBrandAppstore />
+                        </span>
+                        Download the iOS App
                     </a>
                 </div>
                 <Space h="xl" />
