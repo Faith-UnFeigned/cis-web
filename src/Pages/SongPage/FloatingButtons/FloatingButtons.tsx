@@ -1,21 +1,24 @@
-import { ActionIcon, Affix, Menu, Slider, rem } from "@mantine/core";
+import { ActionIcon, Affix, Menu, Slider, Tooltip, rem } from "@mantine/core";
 import {
     IconAdjustmentsHorizontal,
     IconHome,
+    IconMaximize,
     IconMoon,
     IconSun,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
-import classes from "./FloatingButtons.module.css";
+import classes from "./FloatingButtons.module.scss";
 import { useColorMode } from "../../../Context/ColorMode";
 
 export default function FloatingButtons({
     textSize,
     setTextSize,
+    togglePresentationMode,
 }: {
     textSize: number;
     setTextSize: (val: number) => void;
+    togglePresentationMode: () => void;
 }) {
     const { colorMode, toggleColorMode } = useColorMode();
 
@@ -28,11 +31,23 @@ export default function FloatingButtons({
             }}
             className={classes.container}
         >
-            <Link to={"/"} style={{ marginBottom: "1em" }}>
-                <ActionIcon size={50} variant="default">
-                    <IconHome />
+            <Tooltip label="Presentation mode">
+                <ActionIcon
+                    size={50}
+                    variant="default"
+                    onClick={togglePresentationMode}
+                >
+                    <IconMaximize />
                 </ActionIcon>
-            </Link>
+            </Tooltip>
+
+            <Tooltip label="Go home">
+                <Link to={"/"}>
+                    <ActionIcon size={50} variant="default">
+                        <IconHome />
+                    </ActionIcon>
+                </Link>
+            </Tooltip>
 
             <Menu
                 trigger="click-hover"
