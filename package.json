@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
+    "@mantine/carousel": "^7.9.2",
     "@mantine/core": "^7.3.2",
     "@mantine/hooks": "^7.3.2",
-    "@mantine/tiptap": "^7.3.2",
     "@tabler/icons-react": "^3.0.0",
+    "embla-carousel-react": "^8.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.0",
