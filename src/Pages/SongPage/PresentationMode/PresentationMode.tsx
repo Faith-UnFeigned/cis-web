@@ -49,7 +49,7 @@ export function PresentationMode({
                     ? content
                           .split(
                               // Line breaks and end of headings or paragraphs
-                              /(<br\s*\/?>\s*<br\s*\/?>)|(<\/h\d>)|(<\/p>)/g
+                              /(<br\s*\/?>\s*<br\s*\/?>)|(<\/h\d>)|(<\/p>)|(<\/b>(<br\s*\/?>)?<p>)/g
                           )
                           .map((item) => item?.replaceAll(/<br\s*\/?>/g, "\n"))
                           .map((item) =>
