@@ -2,14 +2,15 @@ import { useCallback, useEffect, useState } from "react";
 import { Alert, AppShell, Button, LoadingOverlay } from "@mantine/core";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { useParams } from "react-router-dom";
+import { IconInfoCircle, IconReload } from "@tabler/icons-react";
 
-import { Hymn } from "../../utils";
+import { Hymn } from "../../utils/types";
 import { AppHeader } from "./AppHeader/AppHeader";
 import { getHymnalFileUrl } from "../../data/hymnalsConfig";
 import HymnPreview from "./HymnPreview/HymnPreview";
 import FloatingButtons from "./FloatingButtons/FloatingButtons";
 import { HymnList } from "./HymnList/HymnList";
-import { IconInfoCircle, IconReload } from "@tabler/icons-react";
+import { PresentationMode } from "./PresentationMode/PresentationMode";
 
 export type HymnMap = Record<number, Hymn>;
 
@@ -17,6 +18,7 @@ export default function SongPage() {
     const [error, setError] = useState<string | null>(null);
     const [hymns, setHymns] = useState<HymnMap | null>(null);
     const [drawerOpened, { toggle, close }] = useDisclosure();
+    const [presenting, setPresenting] = useState(false);
     const [textSize, setTextSize] = useLocalStorage({
         key: "textSize",
         defaultValue: 1.2,
@@ -98,39 +100,54 @@ export default function SongPage() {
     const selectedHymn = hymns[Number(number)];
 
     return (
-        <AppShell
-            header={{ height: 60 }}
-            navbar={{
-                width: 300,
-                breakpoint: "sm",
-                collapsed: { mobile: !drawerOpened },
-            }}
-            padding="md"
-        >
-            <AppHeader
-                drawerOpened={drawerOpened}
-                toggle={toggle}
-                selectedHymn={selectedHymn}
-                selectedItem={Number(number)}
-                currentLanguage={language || "english"}
-                hymns={hymns}
-                resetHymnalData={() => setHymns(null)}
-            />
-            <AppShell.Navbar p="md" style={{ overflow: "scroll" }}>
-                <HymnList
-                    error={error}
-                    list={Object.values(hymns)}
+        <>
+            <AppShell
+                header={{ height: 60 }}
+                navbar={{
+                    width: 300,
+                    breakpoint: "sm",
+                    collapsed: { mobile: !drawerOpened },
+                }}
+                padding="md"
+            >
+                <AppHeader
+                    drawerOpened={drawerOpened}
+                    toggle={toggle}
+                    selectedHymn={selectedHymn}
                     selectedItem={Number(number)}
-                    handleItemClick={() => close()}
+                    currentLanguage={language || "english"}
+                    hymns={hymns}
+                    resetHymnalData={() => setHymns(null)}
                 />
-            </AppShell.Navbar>
-            <AppShell.Main>
-                <HymnPreview selectedItem={selectedHymn} textSize={textSize} />
-                <FloatingButtons
-                    textSize={textSize}
-                    setTextSize={setTextSize}
+                <AppShell.Navbar p="md" style={{ overflow: "scroll" }}>
+                    <HymnList
+                        error={error}
+                        list={Object.values(hymns)}
+                        selectedItem={Number(number)}
+                        handleItemClick={() => close()}
+                    />
+                </AppShell.Navbar>
+                <AppShell.Main>
+                    <HymnPreview
+                        selectedItem={selectedHymn}
+                        textSize={textSize}
+                    />
+                    <FloatingButtons
+                        textSize={textSize}
+                        setTextSize={setTextSize}
+                        togglePresentationMode={() =>
+                            setPresenting((value) => !value)
+                        }
+                    />
+                </AppShell.Main>
+            </AppShell>
+            {selectedHymn && (
+                <PresentationMode
+                    selectedHymn={selectedHymn}
+                    presenting={presenting}
+                    setPresenting={setPresenting}
                 />
-            </AppShell.Main>
-        </AppShell>
+            )}
+        </>
     );
 }

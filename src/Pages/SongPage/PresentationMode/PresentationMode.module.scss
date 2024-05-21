@@ -1,0 +1,18 @@
+.box {
+    background-color: var(--mantine-color-body);
+
+    .slideContainer {
+        height: 100vh;
+        padding: 2em;
+        white-space: pre-wrap;
+        font-size: max(1em, 3vw);
+        font-family: "Nunito", var(--mantine-font-family);
+    }
+
+    .exitButton {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        border-radius: 50%;
+    }
+}

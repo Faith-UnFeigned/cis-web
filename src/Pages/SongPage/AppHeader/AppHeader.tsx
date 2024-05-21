@@ -7,7 +7,7 @@ import {
     ActionIcon,
     NumberInput,
 } from "@mantine/core";
-import { Hymn } from "../../../utils";
+import { Hymn } from "../../../utils/types";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 import classes from "./AppHeader.module.css";

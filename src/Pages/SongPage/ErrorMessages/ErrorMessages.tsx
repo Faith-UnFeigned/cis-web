@@ -1,7 +1,7 @@
 import { Alert, Code } from "@mantine/core";
 import { IconInfoCircle } from "@tabler/icons-react";
 
-import { Hymn } from "../../../utils";
+import { Hymn } from "../../../utils/types";
 
 export function InvalidHymnMessage({ selectedHymn }: { selectedHymn: Hymn }) {
     return (
