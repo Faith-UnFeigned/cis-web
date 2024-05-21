@@ -7,7 +7,7 @@ import ReactMarkdown from "react-markdown";
 import "@mantine/carousel/styles.css";
 
 import classes from "./PresentationMode.module.scss";
-import { Hymn } from "../../../utils";
+import { Hymn } from "../../../utils/types";
 
 export function PresentationMode({
     presenting,

@@ -8,7 +8,7 @@ import {
     InvalidHymnMessage,
     NoHymnMessage,
 } from "../ErrorMessages/ErrorMessages";
-import { Hymn } from "../../../utils";
+import { Hymn } from "../../../utils/types";
 import { HYMNALS_CONFIG } from "../../../data/hymnalsConfig";
 
 export default function HymnPreview({

@@ -1,6 +1,6 @@
 import { List, Text, useMantineTheme } from "@mantine/core";
 import { useColorMode } from "../../../Context/ColorMode";
-import { Hymn } from "../../../utils";
+import { Hymn } from "../../../utils/types";
 import { Link, useParams } from "react-router-dom";
 
 export function HymnListItem({

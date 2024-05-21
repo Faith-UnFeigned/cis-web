@@ -4,7 +4,7 @@ import { useLocalStorage } from "@mantine/hooks";
 
 import styles from "./HymnList.module.scss";
 import { HymnListItem } from "./HymnListItem";
-import { Hymn } from "../../../utils";
+import { Hymn } from "../../../utils/types";
 
 type SortOrderOption = "number" | "alphabetically";
 

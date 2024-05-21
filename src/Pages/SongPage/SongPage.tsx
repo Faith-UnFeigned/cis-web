@@ -4,7 +4,7 @@ import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 import { useParams } from "react-router-dom";
 import { IconInfoCircle, IconReload } from "@tabler/icons-react";
 
-import { Hymn } from "../../utils";
+import { Hymn } from "../../utils/types";
 import { AppHeader } from "./AppHeader/AppHeader";
 import { getHymnalFileUrl } from "../../data/hymnalsConfig";
 import HymnPreview from "./HymnPreview/HymnPreview";
