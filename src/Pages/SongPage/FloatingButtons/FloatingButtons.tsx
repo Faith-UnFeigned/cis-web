@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 import classes from "./FloatingButtons.module.scss";
 import { useColorMode } from "../../../Context/ColorMode";
+import { isFullscreenSupported } from "../../../utils/isFullscreenSupported";
 
 export default function FloatingButtons({
     textSize,
@@ -31,15 +32,17 @@ export default function FloatingButtons({
             }}
             className={classes.container}
         >
-            <Tooltip label="Presentation mode">
-                <ActionIcon
-                    size={50}
-                    variant="default"
-                    onClick={togglePresentationMode}
-                >
-                    <IconMaximize />
-                </ActionIcon>
-            </Tooltip>
+            {isFullscreenSupported() && (
+                <Tooltip label="Presentation mode">
+                    <ActionIcon
+                        size={50}
+                        variant="default"
+                        onClick={togglePresentationMode}
+                    >
+                        <IconMaximize />
+                    </ActionIcon>
+                </Tooltip>
+            )}
 
             <Tooltip label="Go home">
                 <Link to={"/"}>
