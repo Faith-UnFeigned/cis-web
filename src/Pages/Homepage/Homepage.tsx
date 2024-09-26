@@ -43,7 +43,11 @@ export function Homepage() {
                         className={styles.links}
                         style={{
                             borderColor:
-                                theme.colors.gray[colorMode === "dark" ? 8 : 1],
+                                theme.colors.gray[colorMode === "dark" ? 8 : 2],
+                            backgroundColor:
+                                colorMode === "dark"
+                                    ? "hsl(0, 0%, 16%)"
+                                    : "hsl(0, 0%, 99%)",
                         }}
                     >
                         {[...HYMNALS_CONFIG]
