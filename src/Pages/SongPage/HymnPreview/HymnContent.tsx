@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import { Hymn } from "../../../utils/types";
 import { InvalidHymnMessage } from "../ErrorMessages/ErrorMessages";
 
 export function HymnContent({ hymn }: { hymn: Hymn }) {
