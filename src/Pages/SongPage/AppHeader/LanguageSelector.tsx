@@ -67,7 +67,7 @@ export function LanguageSelector({
             .map((value) => (
               <Link
                 key={value.key}
-                to={`/songs/${value.language}/${value.key}/${selectedItem}`}
+                to={`/songs/${value.fileName}/${selectedItem}`}
                 onClick={() => {
                   close();
                   resetHymnalData();
