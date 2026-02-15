@@ -1,4 +1,35 @@
-import { AppShell, Group, Skeleton, Stack, Center } from "@mantine/core";
+import { AppShell, Group, Skeleton, Stack, Center, Text } from "@mantine/core";
+
+const VERSE_LINES: string[][] = [
+  ["70%", "65%", "60%", "68%"],
+  ["62%", "68%", "58%", "64%"],
+  ["66%", "72%", "60%", "68%"],
+  ["58%", "64%", "70%", "62%"],
+];
+
+function VerseSkeleton({ number, lines }: { number: number; lines: string[] }) {
+  return (
+    <div style={{ marginBottom: "2em" }}>
+      <Text
+        size="xs"
+        fw={600}
+        c="dimmed"
+        mb={6}
+        style={{ letterSpacing: "0.05em" }}
+      >
+        VERSE {number}
+      </Text>
+      {lines.map((width, i) => (
+        <Skeleton
+          key={i}
+          height={20}
+          width={width}
+          mb={i < lines.length - 1 ? 10 : 0}
+        />
+      ))}
+    </div>
+  );
+}
 
 export function SongPageSkeleton() {
   return (
@@ -27,8 +58,8 @@ export function SongPageSkeleton() {
         <Skeleton height={36} radius="sm" mb="md" />
         <Skeleton height={20} width={120} mb="md" />
         <Stack gap="xs">
-          {Array.from({ length: 35 }).map((_, i) => (
-            <Skeleton key={i} height={20} radius="sm" width={`85%`} />
+          {Array.from({ length: 15 }).map((_, i) => (
+            <Skeleton key={i} height={20} radius="sm" width="85%" />
           ))}
         </Stack>
       </AppShell.Navbar>
@@ -36,30 +67,9 @@ export function SongPageSkeleton() {
       <AppShell.Main>
         <Center>
           <div style={{ maxWidth: 600, width: "100%", fontSize: "1.2em" }}>
-            <div style={{ marginBottom: "1.5em" }}>
-              <Skeleton height={20} width="70%" mb={10} />
-              <Skeleton height={20} width="65%" mb={10} />
-              <Skeleton height={20} width="60%" mb={10} />
-              <Skeleton height={20} width="68%" />
-            </div>
-            <div style={{ marginBottom: "1.5em" }}>
-              <Skeleton height={20} width="62%" mb={10} />
-              <Skeleton height={20} width="68%" mb={10} />
-              <Skeleton height={20} width="58%" mb={10} />
-              <Skeleton height={20} width="64%" />
-            </div>
-            <div style={{ marginBottom: "1.5em" }}>
-              <Skeleton height={20} width="66%" mb={10} />
-              <Skeleton height={20} width="72%" mb={10} />
-              <Skeleton height={20} width="60%" mb={10} />
-              <Skeleton height={20} width="68%" />
-            </div>
-            <div style={{ marginBottom: "1.5em" }}>
-              <Skeleton height={20} width="58%" mb={10} />
-              <Skeleton height={20} width="64%" mb={10} />
-              <Skeleton height={20} width="70%" mb={10} />
-              <Skeleton height={20} width="62%" />
-            </div>
+            {VERSE_LINES.map((lines, i) => (
+              <VerseSkeleton key={i} number={i + 1} lines={lines} />
+            ))}
           </div>
         </Center>
       </AppShell.Main>

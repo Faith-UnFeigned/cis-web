@@ -3,6 +3,7 @@ export type HymnalConfig = {
   title: string;
   key: string;
   fileName: string;
+  refrainLabel?: string;
 };
 
 export const getHymnalFileUrl = (fileName: string) => {
@@ -23,6 +24,7 @@ export const HYMNALS_CONFIG: HymnalConfig[] = [
     title: "Christ In Song",
     language: "English",
     fileName: "english/english",
+    refrainLabel: "CHORUS",
   },
   {
     key: "tswana",
@@ -107,12 +109,14 @@ export const HYMNALS_CONFIG: HymnalConfig[] = [
     title: "SDA Hymnal",
     language: "English",
     fileName: "english/sdah",
+    refrainLabel: "Chorus",
   },
   {
     key: "kinyarwanda",
     title: "Indirimbo Zo Guhimbaza Imana",
     language: "Kinyarwanda",
     fileName: "kinyarwanda/kinyarwanda",
+    refrainLabel: "Gusubiramo",
   },
   {
     key: "pt",
@@ -149,6 +153,7 @@ export const HYMNALS_CONFIG: HymnalConfig[] = [
     title: "Donnez-Lui Gloire",
     language: "Français",
     fileName: "français/dg",
+    refrainLabel: "Refrain",
   },
   {
     key: "icibemba",
@@ -161,6 +166,7 @@ export const HYMNALS_CONFIG: HymnalConfig[] = [
     title: "Indirimbo",
     language: "Kirundi",
     fileName: "kirundi/kirundi",
+    refrainLabel: "Gusubiramo",
   },
   {
     key: "twi",

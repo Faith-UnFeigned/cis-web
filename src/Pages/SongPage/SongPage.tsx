@@ -33,7 +33,7 @@ export default function SongPage() {
     document.body.scrollIntoView({ behavior: "smooth" });
   }, [number]);
 
-  const handleLoadedData = (jsonData: Hymn[]) => {
+  const handleLoadedData = useCallback((jsonData: Hymn[]) => {
     setHymns(
       jsonData.reduce(
         (accumulator, current) => ({
@@ -44,23 +44,26 @@ export default function SongPage() {
       ),
     );
     setError(null);
-  };
-
-  const handleFetchData = useCallback(async (url: string) => {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Error fetching data.");
-      }
-      const jsonData: Hymn[] = await response.json();
-      handleLoadedData(jsonData);
-    } catch (error) {
-      console.error("Error fetching JSON data:", error);
-      setError((error as Error).toString());
-    } finally {
-      console.log("Done fetching data.");
-    }
   }, []);
+
+  const handleFetchData = useCallback(
+    async (url: string) => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("Error fetching data.");
+        }
+        const jsonData: Hymn[] = await response.json();
+        handleLoadedData(jsonData);
+      } catch (error) {
+        console.error("Error fetching JSON data:", error);
+        setError((error as Error).toString());
+      } finally {
+        console.log("Done fetching data.");
+      }
+    },
+    [handleLoadedData],
+  );
 
   useEffect(() => {
     if (hymnalConfig) {
