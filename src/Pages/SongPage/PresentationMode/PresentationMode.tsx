@@ -3,7 +3,6 @@ import { ActionIcon, Box, Center } from "@mantine/core";
 import { useFullscreen } from "@mantine/hooks";
 import { Carousel } from "@mantine/carousel";
 import { IconMinimize } from "@tabler/icons-react";
-import ReactMarkdown from "react-markdown";
 import "@mantine/carousel/styles.css";
 
 import classes from "./PresentationMode.module.scss";
@@ -49,7 +48,7 @@ export function PresentationMode({
                         {verses.map((verse, index) => (
                             <Carousel.Slide key={`${index}:${verse}`}>
                                 <Center className={classes.slideContainer}>
-                                    <ReactMarkdown>{verse}</ReactMarkdown>
+                                    {verse}
                                 </Center>
                             </Carousel.Slide>
                         ))}

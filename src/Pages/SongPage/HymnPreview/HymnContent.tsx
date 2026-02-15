@@ -1,18 +1,32 @@
-import ReactMarkdown from "react-markdown";
-import { Hymn } from "../../../utils/types";
-import { InvalidHymnMessage } from "../ErrorMessages/ErrorMessages";
+import { Hymn, HymnLyricBlock } from "../../../utils/types";
 
 export function HymnContent({ hymn }: { hymn: Hymn }) {
-  const content = hymn.content || hymn.markdown;
+  return (
+    <div>
+      {hymn.lyrics.map((block, index) => (
+        <LyricBlock key={index} block={block} />
+      ))}
+    </div>
+  );
+}
 
-  if (!content) {
-    return <InvalidHymnMessage selectedHymn={hymn} />;
-  }
+function LyricBlock({ block }: { block: HymnLyricBlock }) {
+  const isRefrain = block.type === "refrain";
 
-  // Since some hymn.content are not trully html, we first check if it contains some tags before rendering it.
-  if (/<[a-z][\s\S]*>/i.test(content)) {
-    return <div dangerouslySetInnerHTML={{ __html: content }} />;
-  }
-
-  return <ReactMarkdown>{content}</ReactMarkdown>;
+  return (
+    <div
+      style={{
+        marginBottom: "1em",
+        ...(isRefrain && {
+          fontStyle: "italic",
+          borderLeft: "3px solid currentColor",
+          paddingLeft: "0.75em",
+        }),
+      }}
+    >
+      {block.lines.map((line, i) => (
+        <div key={i}>{line}</div>
+      ))}
+    </div>
+  );
 }
