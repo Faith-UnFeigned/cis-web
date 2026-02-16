@@ -1,7 +1,7 @@
-import { List, Text, useMantineTheme } from "@mantine/core";
-import { useColorMode } from "../../../Context/ColorMode";
-import { Hymn } from "../../../utils/types";
-import { Link, useParams } from "react-router-dom";
+import { List, Text, useMantineTheme } from '@mantine/core';
+import { Link, useParams } from 'react-router-dom';
+import { useColorMode } from '../../../Context/ColorMode';
+import type { Hymn } from '../../../utils/types';
 
 export function HymnListItem({
   item,
@@ -17,21 +17,13 @@ export function HymnListItem({
   const { language, key } = useParams();
 
   return (
-    <Link
-      to={`/songs/${language}/${key}/${item.number}`}
-      onClick={() => handleItemClick(item.number)}
-    >
+    <Link to={`/songs/${language}/${key}/${item.number}`} onClick={() => handleItemClick(item.number)}>
       <List.Item
-        id={"hymn-" + item.number}
+        id={`hymn-${item.number}`}
         style={{
-          cursor: "pointer",
-          "--hover-color": theme.colors.gray[colorMode === "dark" ? 9 : 0],
-          backgroundColor:
-            selectedItem === item.number
-              ? colorMode === "dark"
-                ? "#333"
-                : "#eee"
-              : "transparent",
+          cursor: 'pointer',
+          '--hover-color': theme.colors.gray[colorMode === 'dark' ? 9 : 0],
+          backgroundColor: selectedItem === item.number ? (colorMode === 'dark' ? '#333' : '#eee') : 'transparent',
           paddingLeft: theme.spacing.md,
           paddingTop: theme.spacing.xs,
           paddingBottom: theme.spacing.xs,
@@ -42,7 +34,7 @@ export function HymnListItem({
       >
         <Text
           style={{
-            fontWeight: selectedItem === item.number ? "bold" : "normal",
+            fontWeight: selectedItem === item.number ? 'bold' : 'normal',
           }}
         >
           {item.title}

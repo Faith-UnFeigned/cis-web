@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
 /**
  * Returns a callback which can be used to delay any action
@@ -14,24 +14,24 @@ import { useCallback, useState } from "react";
  */
 
 export function useDebouncedAction() {
-    const [lastAction, setLastAction] = useState<{
-        timeOutId: number;
-    } | null>(null);
+  const [lastAction, setLastAction] = useState<{
+    timeOutId: number;
+  } | null>(null);
 
-    const delayAction = useCallback(
-        (performAction: () => void, milliseconds: number) => {
-            if (lastAction !== null) {
-                clearTimeout(lastAction.timeOutId);
-            }
-            setLastAction({
-                timeOutId: setTimeout(() => {
-                    setLastAction(null);
-                    performAction();
-                }, milliseconds),
-            });
-        },
-        [lastAction]
-    );
+  const delayAction = useCallback(
+    (performAction: () => void, milliseconds: number) => {
+      if (lastAction !== null) {
+        clearTimeout(lastAction.timeOutId);
+      }
+      setLastAction({
+        timeOutId: setTimeout(() => {
+          setLastAction(null);
+          performAction();
+        }, milliseconds),
+      });
+    },
+    [lastAction],
+  );
 
-    return delayAction;
+  return delayAction;
 }
