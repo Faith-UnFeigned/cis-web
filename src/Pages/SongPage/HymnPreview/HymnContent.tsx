@@ -1,12 +1,29 @@
-import type { Hymn, HymnLyricBlock } from "../../../utils/types";
-import { HYMNALS_CONFIG } from "../../../data/hymnalsConfig";
 import { useParams } from "react-router-dom";
+import { HYMNALS_CONFIG } from "../../../data/hymnalsConfig";
+import type { Hymn, HymnLyricBlock } from "../../../utils/types";
 
 export function HymnContent({ hymn }: { hymn: Hymn }) {
   return (
     <div>
-      {hymn.lyrics.map((block, index) => (
-        <LyricBlock key={index} block={block} />
+      <div
+        style={{
+          textAlign: "center",
+          marginBottom: "2em",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "1.6em",
+            fontWeight: 700,
+            margin: 0,
+            lineHeight: 1.3,
+          }}
+        >
+          {`${hymn.number}. ${hymn.title}`}
+        </h1>
+      </div>
+      {hymn.lyrics.map((block) => (
+        <LyricBlock key={block.index} block={block} />
       ))}
     </div>
   );

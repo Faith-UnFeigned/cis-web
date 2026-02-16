@@ -1,4 +1,4 @@
-import { AppShell, Group, Skeleton, Stack, Center, Text } from "@mantine/core";
+import { AppShell, Center, Group, Skeleton, Stack, Text } from "@mantine/core";
 
 const VERSE_LINES: string[][] = [
   ["70%", "65%", "60%", "68%"],
@@ -21,7 +21,7 @@ function VerseSkeleton({ number, lines }: { number: number; lines: string[] }) {
       </Text>
       {lines.map((width, i) => (
         <Skeleton
-          key={i}
+          key={width}
           height={20}
           width={width}
           mb={i < lines.length - 1 ? 10 : 0}
@@ -67,6 +67,16 @@ export function SongPageSkeleton() {
       <AppShell.Main>
         <Center>
           <div style={{ maxWidth: 600, width: "100%", fontSize: "1.2em" }}>
+            <div
+              style={{
+                textAlign: "center",
+                marginBottom: "2em",
+                paddingBottom: "1.5em",
+                borderBottom: "1px solid var(--mantine-color-gray-2)",
+              }}
+            >
+              <Skeleton height={28} width="60%" mx="auto" />
+            </div>
             {VERSE_LINES.map((lines, i) => (
               <VerseSkeleton key={i} number={i + 1} lines={lines} />
             ))}
