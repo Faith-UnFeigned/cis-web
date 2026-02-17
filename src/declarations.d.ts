@@ -1,10 +1,10 @@
-declare module "*.module.scss" {
-	const content: Record<string, string>;
-	export default content;
+declare module '*.module.scss' {
+  const content: Record<string, string>;
+  export default content;
 }
 
 interface Document {
-	webkitFullscreenEnabled?: boolean;
-	mozFullscreenEnabled?: boolean;
-	msFullscreenEnabled?: boolean;
+  webkitFullscreenEnabled?: boolean;
+  mozFullscreenEnabled?: boolean;
+  msFullscreenEnabled?: boolean;
 }

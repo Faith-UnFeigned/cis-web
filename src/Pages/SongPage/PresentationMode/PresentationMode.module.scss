@@ -1,31 +1,31 @@
 .box {
-	background-color: var(--mantine-color-body);
+  background-color: var(--mantine-color-body);
 
-	.slideContainer {
-		height: 100vh;
-		padding: 2em;
-		white-space: pre-wrap;
-		font-size: max(1.3em, 4vw);
-		font-family: "Nunito", var(--mantine-font-family);
-	}
+  .slideContainer {
+    height: 100vh;
+    padding: 2em;
+    white-space: pre-wrap;
+    font-size: max(1.3em, 4vw);
+    font-family: "Nunito", var(--mantine-font-family);
+  }
 
-	.slideLabel {
-		font-size: 0.4em;
-		font-weight: 600;
-		color: var(--mantine-color-dimmed);
-		letter-spacing: 0.05em;
-		margin-bottom: 0.5em;
-		text-align: center;
-	}
+  .slideLabel {
+    font-size: 0.4em;
+    font-weight: 600;
+    color: var(--mantine-color-dimmed);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5em;
+    text-align: center;
+  }
 
-	.refrainText {
-		font-style: italic;
-	}
+  .refrainText {
+    font-style: italic;
+  }
 
-	.exitButton {
-		position: fixed;
-		right: 20px;
-		bottom: 20px;
-		border-radius: 50%;
-	}
+  .exitButton {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 50%;
+  }
 }
