@@ -1,38 +1,38 @@
 {
-  "name": "cis-web",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "biome check .",
-    "lint:fix": "biome lint --write",
-    "format": "biome format . --write",
-    "fix:all": "biome check --write",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.11.3",
-    "@mantine/carousel": "^7.9.2",
-    "@mantine/core": "^7.3.2",
-    "@mantine/hooks": "^7.3.2",
-    "@tabler/icons-react": "^3.0.0",
-    "embla-carousel-react": "^8.1.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.3"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.4.0",
-    "@types/react": "^18.2.45",
-    "@types/react-dom": "^18.2.18",
-    "@vitejs/plugin-react": "^4.2.1",
-    "postcss": "^8.4.32",
-    "postcss-preset-mantine": "^1.12.1",
-    "postcss-simple-vars": "^7.0.1",
-    "sass": "^1.70.0",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.0"
-  }
+	"name": "cis-web",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"lint": "biome check .",
+		"lint:fix": "biome lint --write",
+		"format": "biome format . --write",
+		"fix:all": "biome check --write",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@emotion/react": "^11.11.3",
+		"@mantine/carousel": "^7.9.2",
+		"@mantine/core": "^7.3.2",
+		"@mantine/hooks": "^7.3.2",
+		"@tabler/icons-react": "^3.0.0",
+		"embla-carousel-react": "^8.1.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^6.21.3"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.0",
+		"@types/react": "^18.2.45",
+		"@types/react-dom": "^18.2.18",
+		"@vitejs/plugin-react": "^4.2.1",
+		"postcss": "^8.4.32",
+		"postcss-preset-mantine": "^1.12.1",
+		"postcss-simple-vars": "^7.0.1",
+		"sass": "^1.70.0",
+		"typescript": "^5.3.3",
+		"vite": "^5.0.0"
+	}
 }

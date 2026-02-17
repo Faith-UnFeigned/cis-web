@@ -1,39 +1,42 @@
-import { MantineProvider } from '@mantine/core';
-import '@mantine/core/styles.css';
-import { Route, Routes } from 'react-router-dom';
+import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+import { Route, Routes } from "react-router-dom";
 
-import './App.css';
-import { ColorModeProvider, useColorMode } from './Context/ColorMode';
-import { Homepage } from './Pages/Homepage/Homepage';
-import InfoPage from './Pages/Info/Info';
-import NotFound from './Pages/NotFound/NotFound';
-import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
-import SongPage from './Pages/SongPage/SongPage';
-import SupportPage from './Pages/Support/Support';
+import "./App.css";
+import { ColorModeProvider, useColorMode } from "./Context/ColorMode";
+import { Homepage } from "./Pages/Homepage/Homepage";
+import InfoPage from "./Pages/Info/Info";
+import NotFound from "./Pages/NotFound/NotFound";
+import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
+import SongPage from "./Pages/SongPage/SongPage";
+import SupportPage from "./Pages/Support/Support";
 
 function AppWithColorModeProvider() {
-  return (
-    <ColorModeProvider>
-      <App />
-    </ColorModeProvider>
-  );
+	return (
+		<ColorModeProvider>
+			<App />
+		</ColorModeProvider>
+	);
 }
 
 function App() {
-  const { colorMode } = useColorMode();
+	const { colorMode } = useColorMode();
 
-  return (
-    <MantineProvider forceColorScheme={colorMode} theme={{ primaryColor: 'green' }}>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/songs/:language/:key/:number" element={<SongPage />} />
-        <Route path="/support" element={<SupportPage />} />
-        <Route path="/info" element={<InfoPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </MantineProvider>
-  );
+	return (
+		<MantineProvider
+			forceColorScheme={colorMode}
+			theme={{ primaryColor: "green" }}
+		>
+			<Routes>
+				<Route path="/" element={<Homepage />} />
+				<Route path="/songs/:language/:key/:number" element={<SongPage />} />
+				<Route path="/support" element={<SupportPage />} />
+				<Route path="/info" element={<InfoPage />} />
+				<Route path="/privacy-policy" element={<PrivacyPolicy />} />
+				<Route path="*" element={<NotFound />} />
+			</Routes>
+		</MantineProvider>
+	);
 }
 
 export default AppWithColorModeProvider;

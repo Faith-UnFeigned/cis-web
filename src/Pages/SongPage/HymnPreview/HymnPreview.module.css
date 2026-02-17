@@ -1,7 +1,7 @@
 .preview {
-  font-family: "Nunito", var(--mantine-font-family);
-  padding-left: 0 !important;
-  max-width: 600px;
+	font-family: "Nunito", var(--mantine-font-family);
+	padding-left: 0 !important;
+	max-width: 600px;
 }
 
 .preview h1,
@@ -10,28 +10,28 @@
 .preview h4,
 .preview h5,
 .preview h6 {
-  margin: 0.67em 0 !important;
+	margin: 0.67em 0 !important;
 }
 
 .preview h1 {
-  font-size: 2em;
+	font-size: 2em;
 }
 .preview h2 {
-  font-size: 1.5em;
+	font-size: 1.5em;
 }
 .preview h3 {
-  font-size: 1.17em;
+	font-size: 1.17em;
 }
 .preview h4 {
-  font-size: 1em;
+	font-size: 1em;
 }
 .preview h5 {
-  font-size: 0.83em;
+	font-size: 0.83em;
 }
 .preview h6 {
-  font-size: 0.67em;
+	font-size: 0.67em;
 }
 
 .preview p {
-  margin: 1em 0 !important;
+	margin: 1em 0 !important;
 }
