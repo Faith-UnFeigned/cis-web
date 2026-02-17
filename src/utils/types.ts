@@ -1,6 +1,12 @@
+export interface HymnLyricBlock {
+  type: "verse" | "refrain";
+  index?: number;
+  lines: string[];
+}
+
 export interface Hymn {
-    title: string;
-    number: number;
-    content?: string;
-    markdown?: string;
+  number: number;
+  title: string;
+  index?: string;
+  lyrics: HymnLyricBlock[];
 }

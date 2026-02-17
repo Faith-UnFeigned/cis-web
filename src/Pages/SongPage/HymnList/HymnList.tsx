@@ -41,10 +41,11 @@ export function HymnList({
 
             result = list.filter(
                 (hymn) =>
-                    hymn.content?.match(regex) ||
-                    hymn.markdown?.match(regex) ||
                     hymn.title.match(regex) ||
-                    hymn.number.toString().match(regex)
+                    hymn.number.toString().match(regex) ||
+                    hymn.lyrics.some((block) =>
+                        block.lines.some((line) => regex.test(line))
+                    )
             );
         }
 

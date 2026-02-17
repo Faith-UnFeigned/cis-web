@@ -3,12 +3,13 @@ import { ActionIcon, Box, Center } from "@mantine/core";
 import { useFullscreen } from "@mantine/hooks";
 import { Carousel } from "@mantine/carousel";
 import { IconMinimize } from "@tabler/icons-react";
-import ReactMarkdown from "react-markdown";
+import { useParams } from "react-router-dom";
 import "@mantine/carousel/styles.css";
 
 import classes from "./PresentationMode.module.scss";
 import { Hymn } from "../../../utils/types";
-import { getVersesList } from "./getVersesList";
+import { getVersesList, PresentationSlide } from "./getVersesList";
+import { HYMNALS_CONFIG } from "../../../data/hymnalsConfig";
 
 export function PresentationMode({
     presenting,
@@ -19,8 +20,12 @@ export function PresentationMode({
     presenting: boolean;
     setPresenting: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+    const { key } = useParams();
     const { ref, fullscreen, toggle } = useFullscreen();
-    const [verses, setVerses] = useState<Array<string>>([]);
+    const [slides, setSlides] = useState<PresentationSlide[]>([]);
+
+    const language = HYMNALS_CONFIG.find((hymnal) => hymnal.key === key);
+    const refrainLabel = language?.refrainLabel || "CHORUS";
 
     useEffect(() => {
         // When the user exits fullscreen by pressing "Esc" on desktop or the
@@ -38,18 +43,33 @@ export function PresentationMode({
     }, [fullscreen, presenting, toggle]);
 
     useEffect(() => {
-        setVerses(getVersesList(selectedHymn));
-    }, [selectedHymn, setVerses]);
+        setSlides(getVersesList(selectedHymn, refrainLabel));
+    }, [selectedHymn, refrainLabel]);
 
     return (
         <Box ref={ref} className={classes.box}>
             {fullscreen && (
                 <>
                     <Carousel>
-                        {verses.map((verse, index) => (
-                            <Carousel.Slide key={`${index}:${verse}`}>
+                        {slides.map((slide, index) => (
+                            <Carousel.Slide key={`${index}:${slide.text}`}>
                                 <Center className={classes.slideContainer}>
-                                    <ReactMarkdown>{verse}</ReactMarkdown>
+                                    <div>
+                                        {slide.label && (
+                                            <div className={classes.slideLabel}>
+                                                {slide.label}
+                                            </div>
+                                        )}
+                                        <div
+                                            className={
+                                                slide.isRefrain
+                                                    ? classes.refrainText
+                                                    : undefined
+                                            }
+                                        >
+                                            {slide.text}
+                                        </div>
+                                    </div>
                                 </Center>
                             </Carousel.Slide>
                         ))}

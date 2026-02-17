@@ -9,6 +9,19 @@
         font-family: "Nunito", var(--mantine-font-family);
     }
 
+    .slideLabel {
+        font-size: 0.4em;
+        font-weight: 600;
+        color: var(--mantine-color-dimmed);
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5em;
+        text-align: center;
+    }
+
+    .refrainText {
+        font-style: italic;
+    }
+
     .exitButton {
         position: fixed;
         right: 20px;
