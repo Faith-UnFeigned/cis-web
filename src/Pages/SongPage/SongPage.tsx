@@ -27,7 +27,7 @@ export default function SongPage() {
   });
 
   const { number, key } = useParams();
-  const hymnalConfig = HYMNALS_CONFIG.find((h) => h.key === key);
+  const hymnalConfig = HYMNALS_CONFIG.find((h) => h.key === key?.toLowerCase());
 
   useEffect(() => {
     document.body.scrollIntoView({ behavior: "smooth" });
