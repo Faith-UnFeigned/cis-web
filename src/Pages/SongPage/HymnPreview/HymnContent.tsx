@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { HYMNALS_CONFIG } from "../../../data/hymnalsConfig";
 import type { Hymn, HymnLyricBlock } from "../../../utils/types";
+import { formatHymnTitle } from "../../../utils/formatHymnTitle";
 
 export function HymnContent({ hymn }: { hymn: Hymn }) {
   return (
@@ -19,7 +20,7 @@ export function HymnContent({ hymn }: { hymn: Hymn }) {
             lineHeight: 1.3,
           }}
         >
-          {`${hymn.number}. ${hymn.title}`}
+          {`${hymn.number}. ${formatHymnTitle(hymn.title)}`}
         </h1>
       </div>
       {hymn.lyrics.map((block) => (

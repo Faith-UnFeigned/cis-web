@@ -2,6 +2,7 @@ import { List, Text, useMantineTheme } from "@mantine/core";
 import { Link, useParams } from "react-router-dom";
 import { useColorMode } from "../../../Context/ColorMode";
 import type { Hymn } from "../../../utils/types";
+import { formatHymnTitle } from "../../../utils/formatHymnTitle";
 
 export function HymnListItem({
   item,
@@ -45,7 +46,7 @@ export function HymnListItem({
             fontWeight: selectedItem === item.number ? "bold" : "normal",
           }}
         >
-          {`${item.number}. ${item.title}`}
+          {`${item.number}. ${formatHymnTitle(item.title)}`}
         </Text>
       </List.Item>
     </Link>
