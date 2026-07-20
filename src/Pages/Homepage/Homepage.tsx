@@ -1,6 +1,6 @@
 import { NavLink, useMantineTheme } from "@mantine/core";
-import { Link } from "react-router-dom";
-import { useDocumentTitle } from "@mantine/hooks";
+import { Link, Navigate } from "react-router-dom";
+import { useDocumentTitle, useLocalStorage } from "@mantine/hooks";
 import {
   IconArrowsMove,
   IconDeviceMobile,
@@ -9,7 +9,10 @@ import {
 } from "@tabler/icons-react";
 
 import styles from "./Homepage.module.scss";
-import { HYMNALS_CONFIG } from "../../data/hymnalsConfig";
+import {
+  HYMNALS_CONFIG,
+  PREFERRED_HYMNAL_STORAGE_KEY,
+} from "../../data/hymnalsConfig";
 import { useColorMode } from "../../Context/ColorMode";
 import { Feature } from "./Feature/Feature";
 import { Footer } from "../../Components/Footer/Footer";
@@ -18,8 +21,20 @@ import { FLoatingColorModeButton } from "../../Components/FLoatingColorModeButto
 export function Homepage() {
   useDocumentTitle("Christ in Song on the Web");
 
+  const [preferredHymnal, setPreferredHymnal] = useLocalStorage<string>({
+    key: PREFERRED_HYMNAL_STORAGE_KEY,
+    defaultValue: "",
+  });
+  const savedHymnal = HYMNALS_CONFIG.find(
+    (hymnal) => hymnal.key === preferredHymnal,
+  );
+
   const theme = useMantineTheme();
   const { colorMode } = useColorMode();
+
+  if (savedHymnal) {
+    return <Navigate replace to={`/songs/${savedHymnal.fileName}/1`} />;
+  }
 
   return (
     <div className={styles.container}>
@@ -39,6 +54,10 @@ export function Homepage() {
       <section className={styles.languagesContainer} id="languages">
         <div className={styles.languages}>
           <h2>Pick a Hymnal Version</h2>
+          <p className={styles.preferenceHint}>
+            We’ll remember your choice on this device. You can switch languages
+            whenever you need to.
+          </p>
           <div
             className={styles.links}
             style={{
@@ -54,6 +73,7 @@ export function Homepage() {
                   key={value.key}
                   className={styles.link}
                   to={`/songs/${value.fileName}/1`}
+                  onClick={() => setPreferredHymnal(value.key)}
                 >
                   <NavLink label={value.title} description={value.language} />
                 </Link>
