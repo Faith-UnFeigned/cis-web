@@ -21,6 +21,7 @@ export function HymnListItem({
     <Link
       to={`/songs/${language}/${key}/${item.number}`}
       onClick={() => handleItemClick(item.number)}
+      aria-current={selectedItem === item.number ? "page" : undefined}
     >
       <List.Item
         id={"hymn-" + item.number}
@@ -30,8 +31,8 @@ export function HymnListItem({
           backgroundColor:
             selectedItem === item.number
               ? colorMode === "dark"
-                ? "#333"
-                : "#eee"
+                ? theme.colors.green[9]
+                : theme.colors.green[0]
               : "transparent",
           paddingLeft: theme.spacing.md,
           paddingTop: theme.spacing.xs,
@@ -44,6 +45,10 @@ export function HymnListItem({
         <Text
           style={{
             fontWeight: selectedItem === item.number ? "bold" : "normal",
+            color:
+              selectedItem === item.number
+                ? theme.colors.green[colorMode === "dark" ? 3 : 7]
+                : undefined,
           }}
         >
           {`${item.number}. ${formatHymnTitle(item.title)}`}

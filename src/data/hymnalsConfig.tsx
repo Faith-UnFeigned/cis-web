@@ -6,6 +6,8 @@ export type HymnalConfig = {
   refrainLabel?: string;
 };
 
+export const PREFERRED_HYMNAL_STORAGE_KEY = "preferredHymnal";
+
 export const getHymnalFileUrl = (fileName: string) => {
   return `https://raw.githubusercontent.com/TinasheMzondiwa/cis-hymnals/main/v2/${fileName}.json`;
 };

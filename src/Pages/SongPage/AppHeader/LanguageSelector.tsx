@@ -6,13 +6,17 @@ import {
   TextInput,
   List,
   NavLink,
+  ScrollArea,
   Space,
 } from "@mantine/core";
 import { IconLanguage } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
-import { useDisclosure } from "@mantine/hooks";
+import { Link, useParams } from "react-router-dom";
+import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 
-import { HYMNALS_CONFIG } from "../../../data/hymnalsConfig";
+import {
+  HYMNALS_CONFIG,
+  PREFERRED_HYMNAL_STORAGE_KEY,
+} from "../../../data/hymnalsConfig";
 
 export function LanguageSelector({
   selectedItem,
@@ -23,6 +27,11 @@ export function LanguageSelector({
 }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [filterText, setFilterText] = useState("");
+  const [, setPreferredHymnal] = useLocalStorage<string>({
+    key: PREFERRED_HYMNAL_STORAGE_KEY,
+    defaultValue: "",
+  });
+  const { key } = useParams();
 
   const searchRegex = new RegExp(filterText, "i");
 
@@ -37,8 +46,13 @@ export function LanguageSelector({
 
   return (
     <>
-      <Tooltip label="Change Hymnal Version">
-        <ActionIcon size={35} variant="default" onClick={() => open()}>
+      <Tooltip label="Change hymnal language">
+        <ActionIcon
+          aria-label="Change hymnal language"
+          size={35}
+          variant="default"
+          onClick={open}
+        >
           <IconLanguage />
         </ActionIcon>
       </Tooltip>
@@ -46,7 +60,7 @@ export function LanguageSelector({
       <Modal
         opened={opened}
         onClose={close}
-        title="Select Hymnal Version"
+        title="Choose a hymnal"
         centered
         overlayProps={{
           backgroundOpacity: 0.55,
@@ -61,22 +75,29 @@ export function LanguageSelector({
           autoFocus
         />
         <Space style={{ height: "0.7em" }} />
-        <List listStyleType="none">
-          {[...filteredHymnals]
-            .sort((a, b) => (a.title < b.title ? -1 : 1))
-            .map((value) => (
-              <Link
-                key={value.key}
-                to={`/songs/${value.fileName}/${selectedItem}`}
-                onClick={() => {
-                  close();
-                  resetHymnalData();
-                }}
-              >
-                <NavLink label={value.title} description={value.language} />
-              </Link>
-            ))}
-        </List>
+        <ScrollArea.Autosize mah="calc(100vh - 220px)" offsetScrollbars>
+          <List listStyleType="none">
+            {[...filteredHymnals]
+              .sort((a, b) => (a.title < b.title ? -1 : 1))
+              .map((value) => (
+                <Link
+                  key={value.key}
+                  to={`/songs/${value.fileName}/${selectedItem}`}
+                  onClick={() => {
+                    setPreferredHymnal(value.key);
+                    close();
+                    resetHymnalData();
+                  }}
+                >
+                  <NavLink
+                    active={value.key === key}
+                    label={value.title}
+                    description={value.language}
+                  />
+                </Link>
+              ))}
+          </List>
+        </ScrollArea.Autosize>
       </Modal>
     </>
   );

@@ -69,6 +69,12 @@
 
             h2 {}
 
+            .preference-hint {
+                color: var(--mantine-color-dimmed);
+                margin: -0.35rem 0 1.25rem;
+                max-width: 38rem;
+            }
+
             .links {
                 border: 2px solid;
                 border-radius: 0.5em;
