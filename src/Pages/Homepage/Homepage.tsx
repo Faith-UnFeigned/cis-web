@@ -1,22 +1,16 @@
-import { NavLink, useMantineTheme } from "@mantine/core";
-import { Link } from "react-router-dom";
-import { useDocumentTitle } from "@mantine/hooks";
-import {
-  IconArrowsMove,
-  IconDeviceMobile,
-  IconLanguage,
-  IconSearch,
-} from "@tabler/icons-react";
-
-import styles from "./Homepage.module.scss";
-import { HYMNALS_CONFIG } from "../../data/hymnalsConfig";
-import { useColorMode } from "../../Context/ColorMode";
-import { Feature } from "./Feature/Feature";
-import { Footer } from "../../Components/Footer/Footer";
-import { FLoatingColorModeButton } from "../../Components/FLoatingColorModeButton/FLoatingColorModeButton";
+import { NavLink, useMantineTheme } from '@mantine/core';
+import { useDocumentTitle } from '@mantine/hooks';
+import { IconArrowsMove, IconDeviceMobile, IconLanguage, IconSearch } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
+import { FLoatingColorModeButton } from '../../Components/FLoatingColorModeButton/FLoatingColorModeButton';
+import { Footer } from '../../Components/Footer/Footer';
+import { useColorMode } from '../../Context/ColorMode';
+import { HYMNALS_CONFIG } from '../../data/hymnalsConfig';
+import { Feature } from './Feature/Feature';
+import styles from './Homepage.module.scss';
 
 export function Homepage() {
-  useDocumentTitle("Christ in Song on the Web");
+  useDocumentTitle('Christ in Song on the Web');
 
   const theme = useMantineTheme();
   const { colorMode } = useColorMode();
@@ -42,19 +36,14 @@ export function Homepage() {
           <div
             className={styles.links}
             style={{
-              borderColor: theme.colors.gray[colorMode === "dark" ? 8 : 2],
-              backgroundColor:
-                colorMode === "dark" ? "hsl(0, 0%, 16%)" : "hsl(0, 0%, 99%)",
+              borderColor: theme.colors.gray[colorMode === 'dark' ? 8 : 2],
+              backgroundColor: colorMode === 'dark' ? 'hsl(0, 0%, 16%)' : 'hsl(0, 0%, 99%)',
             }}
           >
             {[...HYMNALS_CONFIG]
               .sort((a, b) => (a.title < b.title ? -1 : 1))
               .map((value) => (
-                <Link
-                  key={value.key}
-                  className={styles.link}
-                  to={`/songs/${value.fileName}/1`}
-                >
+                <Link key={value.key} className={styles.link} to={`/songs/${value.fileName}/1`}>
                   <NavLink label={value.title} description={value.language} />
                 </Link>
               ))}

@@ -1,5 +1,5 @@
 export interface HymnLyricBlock {
-  type: "verse" | "refrain";
+  type: 'verse' | 'refrain';
   index?: number;
   lines: string[];
 }

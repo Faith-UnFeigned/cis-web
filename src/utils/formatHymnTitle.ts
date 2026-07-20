@@ -22,7 +22,5 @@ export function formatHymnTitle(title: string): string {
   // titles where most words are shouted (e.g. "YESU NI MKOMBOZI").
   if (upperRatio < 0.7) return title;
 
-  return title
-    .toLowerCase()
-    .replace(/(?:^|\s|[-–—])\S/g, (char) => char.toUpperCase());
+  return title.toLowerCase().replace(/(?:^|\s|[-–—])\S/g, (char) => char.toUpperCase());
 }

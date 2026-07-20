@@ -1,19 +1,11 @@
-import { FormEvent } from "react";
-import {
-  AppShell,
-  Burger,
-  Group,
-  Tooltip,
-  ActionIcon,
-  NumberInput,
-} from "@mantine/core";
-import { Hymn } from "../../../utils/types";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-
-import classes from "./AppHeader.module.css";
-import { HymnMap } from "../SongPage";
-import { useNavigate, useParams } from "react-router-dom";
-import { LanguageSelector } from "./LanguageSelector";
+import { ActionIcon, AppShell, Burger, Group, NumberInput, Tooltip } from '@mantine/core';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import type { FormEvent } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import type { Hymn } from '../../../utils/types';
+import type { HymnMap } from '../SongPage';
+import classes from './AppHeader.module.css';
+import { LanguageSelector } from './LanguageSelector';
 
 export function AppHeader({
   drawerOpened,
@@ -33,8 +25,7 @@ export function AppHeader({
   const navigate = useNavigate();
   const { key, language } = useParams();
 
-  const navigateToSong = (song: number) =>
-    navigate(`/songs/${language}/${key}/${song}`);
+  const navigateToSong = (song: number) => navigate(`/songs/${language}/${key}/${song}`);
 
   const previousHymn = () => {
     if (selectedItem && hymns[selectedItem - 1]) {
@@ -45,7 +36,7 @@ export function AppHeader({
   const onNumberInput = (event: FormEvent<HTMLInputElement>) => {
     const text = (event.target as HTMLInputElement).value;
     const value = Number(text);
-    if (!Number.isNaN(value) && text.trim() !== "") {
+    if (!Number.isNaN(value) && text.trim() !== '') {
       navigateToSong(value);
     }
   };
@@ -64,26 +55,19 @@ export function AppHeader({
         gap="xs"
         align="center"
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          flexDirection: "row",
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: 'row',
         }}
       >
-        <Burger
-          opened={drawerOpened}
-          onClick={toggle}
-          hiddenFrom="sm"
-          size="sm"
-        />
+        <Burger opened={drawerOpened} onClick={toggle} hiddenFrom="sm" size="sm" />
 
-        <Group gap="sm" align="center" style={{ justifySelf: "center" }}>
+        <Group gap="sm" align="center" style={{ justifySelf: 'center' }}>
           <Tooltip label="Previous hymn">
             <ActionIcon
               size={35}
               variant="default"
-              disabled={
-                !selectedHymn || (!!selectedItem && !hymns[selectedItem - 1])
-              }
+              disabled={!selectedHymn || (!!selectedItem && !hymns[selectedItem - 1])}
               onClick={previousHymn}
             >
               <IconChevronLeft />
@@ -100,9 +84,7 @@ export function AppHeader({
             <ActionIcon
               size={35}
               variant="default"
-              disabled={
-                !selectedHymn || (!!selectedItem && !hymns[selectedItem + 1])
-              }
+              disabled={!selectedHymn || (!!selectedItem && !hymns[selectedItem + 1])}
               onClick={nextHymn}
             >
               <IconChevronRight />
@@ -111,10 +93,7 @@ export function AppHeader({
         </Group>
 
         <Group>
-          <LanguageSelector
-            selectedItem={selectedItem}
-            resetHymnalData={resetHymnalData}
-          />
+          <LanguageSelector selectedItem={selectedItem} resetHymnalData={resetHymnalData} />
         </Group>
       </Group>
     </AppShell.Header>
