@@ -26,7 +26,7 @@ export default function SongPage() {
   });
 
   const { number, key } = useParams();
-  const hymnalConfig = HYMNALS_CONFIG.find((h) => h.key === key);
+  const hymnalConfig = HYMNALS_CONFIG.find((h) => h.key === key?.toLowerCase());
 
   // biome-ignore lint: we only want to trigger this when the hymn number & key has changed
   useEffect(() => {
