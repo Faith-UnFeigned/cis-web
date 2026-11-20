@@ -5,7 +5,7 @@ import { Footer } from "../../Components/Footer/Footer";
 import { FLoatingColorModeButton } from "../../Components/FLoatingColorModeButton/FLoatingColorModeButton";
 
 export default function PrivacyPolicy() {
-    useDocumentTitle("Privacy Policy | Christ in Song on the Web");
+    useDocumentTitle("Privacy Policy | Christ in Song");
 
     return (
         <Container
@@ -19,202 +19,151 @@ export default function PrivacyPolicy() {
                     fontFamily: '"Nunito", Verdana, Geneva, Tahoma, sans-serif',
                 }}
             >
-                <h2>Privacy Policy</h2>
+                <h1>Privacy Policy</h1>
                 <p>
-                    Tinashe Mzondiwa built the Christ In Song app as an Open
-                    Source app. This SERVICE is provided by Tinashe Mzondiwa at
-                    no cost and is intended for use as is.
+                    This policy applies to the Christ In Song website and our
+                    apps, including the iOS, Android, macOS, and Apple TV (tvOS)
+                    versions. Christ In Song is provided by Tinashe Mzondiwa at
+                    no cost and is intended to be used as provided.
                 </p>
                 <p>
-                    This page is used to inform visitors regarding my policies
-                    with the collection, use, and disclosure of Personal
-                    Information if anyone decided to use my Service.
+                    This policy explains what information may be handled when
+                    you use Christ In Song, how it is used, and the choices
+                    available to you. We do not require you to create an
+                    account to use the Apple TV app.
+                </p>
+
+                <h2>Apple TV (tvOS)</h2>
+                <p>
+                    The Apple TV app stores app preferences, recently viewed
+                    hymns, pinned hymnals, and saved collections locally on
+                    your Apple TV. The app does not send this local information
+                    to Christ In Song servers or sync it to an account.
                 </p>
                 <p>
-                    If you choose to use my Service, then you agree to the
-                    collection and use of information in relation to this
-                    policy. The Personal Information that I collect is used for
-                    providing and improving the Service. I will not use or share
-                    your information with anyone except as described in this
-                    Privacy Policy.
+                    The tvOS version does not send its analytics events to
+                    Firebase Analytics. When you choose to play a tune, the app
+                    may download a sound-font file from GitHub at
+                    raw.githubusercontent.com. GitHub may receive standard
+                    connection information, such as your IP address and the
+                    requested file, as part of serving that download. See the
+                    <Anchor
+                        href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub Privacy Statement
+                    </Anchor>
+                    .
+                </p>
+
+                <h2>Information and app diagnostics</h2>
+                <p>
+                    App features and data handling vary by platform. The Apple
+                    TV app does not ask you to provide a name, email address, or
+                    other account information. On platforms where analytics or
+                    crash reporting services are integrated, those services may
+                    process usage events and diagnostic information to help us
+                    understand app use and investigate errors. This information
+                    may include app and operating system versions, device
+                    information, event details, crash reports, and the time of
+                    an event.
                 </p>
                 <p>
-                    The terms used in this Privacy Policy have the same meanings
-                    as in our Terms and Conditions, which is accessible at
-                    Christ In Song unless otherwise defined in this Privacy
-                    Policy.
-                </p>
-                <p>
-                    <h2>Information Collection and Use</h2>
-                </p>
-                <p>
-                    For a better experience, while using our Service, I may
-                    require you to provide us with certain personally
-                    identifiable information, including but not limited to
-                    applications logs. The information that I request will be
-                    retained on your device and is not collected by me in any
-                    way.
-                </p>
-                <div>
-                    <p>
-                        The app does use third party services that may collect
-                        information used to identify you.
-                    </p>
-                    <p>
-                        Link to privacy policy of third party service providers
-                        used by the app
-                    </p>
-                    <ul>
-                        <li>
-                            <Anchor
-                                href="https://www.google.com/policies/privacy/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Google Play Services
-                            </Anchor>
-                        </li>
-                        <li>
-                            <Anchor
-                                href="https://firebase.google.com/policies/analytics"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Google Analytics for Firebase
-                            </Anchor>
-                        </li>
-                        <li>
-                            <Anchor
-                                href="https://firebase.google.com/support/privacy/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Firebase Crashlytics
-                            </Anchor>
-                        </li>
-                    </ul>
-                </div>
-                <p>
-                    <h2>Log Data</h2>
-                </p>
-                <p>
-                    I want to inform you that whenever you use my Service, in a
-                    case of an error in the app I collect data and information
-                    (through third party products) on your phone called Log
-                    Data. This Log Data may include information such as your
-                    device Internet Protocol (“IP”) address, device name,
-                    operating system version, the configuration of the app when
-                    utilizing my Service, the time and date of your use of the
-                    Service, and other statistics.
-                </p>
-                <p>
-                    <h2>Cookies</h2>
-                </p>
-                <p>
-                    Cookies are files with a small amount of data that are
-                    commonly used as anonymous unique identifiers. These are
-                    sent to your browser from the websites that you visit and
-                    are stored on your device's internal memory.
-                </p>
-                <p>
-                    This Service does not use these “cookies” explicitly.
-                    However, the app may use third party code and libraries that
-                    use “cookies” to collect information and improve their
-                    services. You have the option to either accept or refuse
-                    these cookies and know when a cookie is being sent to your
-                    device. If you choose to refuse our cookies, you may not be
-                    able to use some portions of this Service.
-                </p>
-                <p>
-                    <h2>Service Providers</h2>
-                </p>
-                <p>
-                    I may employ third-party companies and individuals due to
-                    the following reasons:
+                    Some versions of Christ In Song use third-party services
+                    such as Google Analytics for Firebase, Firebase Crashlytics,
+                    or Google Play Services. Their use depends on the platform
+                    and the services included in that app version. These
+                    providers handle information under their own privacy
+                    policies:
                 </p>
                 <ul>
-                    <li>To facilitate our Service;</li>
-                    <li>To provide the Service on our behalf;</li>
-                    <li>To perform Service-related services; or</li>
-                    <li>To assist us in analyzing how our Service is used.</li>
+                    <li>
+                        <Anchor
+                            href="https://www.google.com/policies/privacy/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Google Privacy Policy (including Google Play
+                            Services)
+                        </Anchor>
+                    </li>
+                    <li>
+                        <Anchor
+                            href="https://firebase.google.com/policies/analytics"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Google Analytics for Firebase Privacy Information
+                        </Anchor>
+                    </li>
+                    <li>
+                        <Anchor
+                            href="https://firebase.google.com/support/privacy/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Firebase Privacy and Security
+                        </Anchor>
+                    </li>
                 </ul>
+
+                <h2>Website storage and cookies</h2>
                 <p>
-                    I want to inform users of this Service that these third
-                    parties have access to your Personal Information. The reason
-                    is to perform the tasks assigned to them on our behalf.
-                    However, they are obligated not to disclose or use the
-                    information for any other purpose.
+                    The website stores preferences such as your selected hymnal
+                    and color mode in your browser’s local storage. The website
+                    does not use cookies explicitly. Third-party resources used
+                    by the website, such as Google Fonts, may receive standard
+                    connection information when your browser requests them.
                 </p>
+
+                <h2>Service providers and external links</h2>
                 <p>
-                    <h2>Security</h2>
+                    We use third-party providers when needed to deliver or
+                    support parts of the service, such as analytics, crash
+                    diagnostics, and file downloads. These providers may process
+                    information needed to perform their services and are
+                    governed by their own privacy policies. Christ In Song may
+                    also link to external websites; we do not control their
+                    content or privacy practices, so please review their
+                    policies before using them.
                 </p>
+
+                <h2>Security and data retention</h2>
                 <p>
-                    I value your trust in providing us your Personal
-                    Information, thus we are striving to use commercially
-                    acceptable means of protecting it. But remember that no
-                    method of transmission over the internet, or method of
-                    electronic storage is 100% secure and reliable, and I cannot
-                    guarantee its absolute security.
+                    We use reasonable measures to protect information handled
+                    by the service. No method of internet transmission or
+                    electronic storage is completely secure. Information saved
+                    locally by the Apple TV app remains on that device unless
+                    you remove it by clearing the app’s data or uninstalling
+                    the app. Third-party providers retain information under
+                    their own policies.
                 </p>
+
+                <h2>Children’s privacy</h2>
                 <p>
-                    <h2>Links to Other Sites</h2>
+                    We do not knowingly collect personal information directly
+                    from children. If you believe a child has provided personal
+                    information to us, contact us so we can review and address
+                    the request.
                 </p>
+
+                <h2>Changes to this policy</h2>
                 <p>
-                    This Service may contain links to other sites. If you click
-                    on a third-party link, you will be directed to that site.
-                    Note that these external sites are not operated by me.
-                    Therefore, I strongly advise you to review the Privacy
-                    Policy of these websites. I have no control over and assume
-                    no responsibility for the content, privacy policies, or
-                    practices of any third-party sites or services.
+                    We may update this policy as our services or data practices
+                    change. We will post the updated policy on this page and
+                    revise the effective date.
                 </p>
+                <p>This policy is effective as of November 19, 2026.</p>
+
+                <h2>Contact</h2>
                 <p>
-                    <h2>Children’s Privacy</h2>
-                </p>
-                <p>
-                    These Services do not address anyone under the age of 13. I
-                    do not knowingly collect personally identifiable information
-                    from children under 13. In the case I discover that a child
-                    under 13 has provided me with personal information, I
-                    immediately delete this from our servers. If you are a
-                    parent or guardian and you are aware that your child has
-                    provided us with personal information, please contact me so
-                    that I will be able to do necessary actions.
-                </p>
-                <p>
-                    <h2>Changes to This Privacy Policy</h2>
-                </p>
-                <p>
-                    I may update our Privacy Policy from time to time. Thus, you
-                    are advised to review this page periodically for any
-                    changes. I will notify you of any changes by posting the new
-                    Privacy Policy on this page.
-                </p>
-                <p>This policy is effective as of 2020-06-30</p>
-                <p>
-                    <h2>Contact Us</h2>
-                </p>
-                <p>
-                    If you have any questions or suggestions about my Privacy
-                    Policy, do not hesitate to contact me at tmzon08@gmail.com.
-                </p>
-                <p>
-                    This privacy policy page was created at{" "}
-                    <Anchor
-                        href="https://privacypolicytemplate.net"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        privacypolicytemplate.net
-                    </Anchor>{" "}
-                    and modified/generated by{" "}
-                    <Anchor
-                        href="https://app-privacy-policy-generator.firebaseapp.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        App Privacy Policy Generator
+                    If you have questions or requests about this policy, email
+                    us at{" "}
+                    <Anchor href="mailto:tmzon08@gmail.com">
+                        tmzon08@gmail.com
                     </Anchor>
+                    .
                 </p>
             </main>
             <Space h="md" />
