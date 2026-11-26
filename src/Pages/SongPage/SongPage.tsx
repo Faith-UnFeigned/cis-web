@@ -15,6 +15,8 @@ import { SongPageSkeleton } from "./SongPageSkeleton";
 
 export type HymnMap = Record<number, Hymn>;
 
+const HYMNAL_REFRESH_INTERVAL_MS = 10 * 60 * 1000;
+
 export default function SongPage() {
   const [error, setError] = useState<string | null>(null);
   const [hymns, setHymns] = useState<HymnMap | null>(null);
@@ -47,28 +49,53 @@ export default function SongPage() {
   }, []);
 
   const handleFetchData = useCallback(
-    async (url: string) => {
+    async (url: string, { signal, background = false }: { signal?: AbortSignal; background?: boolean } = {}) => {
       try {
-        const response = await fetch(url);
+        // `no-cache` makes the browser revalidate with the server (ETag) instead of
+        // serving a possibly stale cached copy, so newly added hymns show up.
+        const response = await fetch(url, { cache: "no-cache", signal });
         if (!response.ok) {
           throw new Error("Error fetching data.");
         }
         const jsonData: Hymn[] = await response.json();
+        if (signal?.aborted) return;
         handleLoadedData(jsonData);
       } catch (error) {
+        if (signal?.aborted) return;
         console.error("Error fetching JSON data:", error);
-        setError((error as Error).toString());
-      } finally {
-        console.log("Done fetching data.");
+        // A failed background refresh keeps the hymns already on screen.
+        if (!background) {
+          setError((error as Error).toString());
+        }
       }
     },
     [handleLoadedData],
   );
 
   useEffect(() => {
-    if (hymnalConfig) {
-      handleFetchData(getHymnalFileUrl(hymnalConfig.fileName));
-    }
+    if (!hymnalConfig) return;
+
+    const url = getHymnalFileUrl(hymnalConfig.fileName);
+    let controller = new AbortController();
+    handleFetchData(url, { signal: controller.signal });
+
+    // Silently refresh so hymns added upstream appear without a manual reload,
+    // e.g. when the tab stays open for a long time.
+    const refresh = () => {
+      if (document.visibilityState !== "visible") return;
+      controller.abort();
+      controller = new AbortController();
+      handleFetchData(url, { signal: controller.signal, background: true });
+    };
+
+    const intervalId = window.setInterval(refresh, HYMNAL_REFRESH_INTERVAL_MS);
+    document.addEventListener("visibilitychange", refresh);
+
+    return () => {
+      controller.abort();
+      window.clearInterval(intervalId);
+      document.removeEventListener("visibilitychange", refresh);
+    };
   }, [handleFetchData, hymnalConfig]);
 
   if (!hymns) {
