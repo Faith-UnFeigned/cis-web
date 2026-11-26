@@ -11,7 +11,7 @@ import { Hymn } from "../../../utils/types";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 import classes from "./AppHeader.module.css";
-import { HymnMap } from "../SongPage";
+import { HymnMap } from "../../../utils/useHymnal";
 import { useNavigate, useParams } from "react-router-dom";
 import { LanguageSelector } from "./LanguageSelector";
 

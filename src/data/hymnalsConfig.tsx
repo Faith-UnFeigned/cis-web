@@ -161,19 +161,19 @@ export const HYMNALS_CONFIG: HymnalConfig[] = [
     key: "icibemba",
     title: "Kristu Mu Nyimbo",
     language: "Icibemba",
-    fileName: "icibemba/Icibemba",
-  },
-  {
-    key: "kirundi",
-    title: "Indirimbo",
-    language: "Kirundi",
-    fileName: "kirundi/kirundi",
-    refrainLabel: "Gusubiramo",
+    fileName: "icibemba/icibemba",
   },
   {
     key: "twi",
     title: "Ndwom",
     language: "Twi",
     fileName: "twi/twi",
+  },
+  {
+    key: "afrikaans",
+    title: "Advent Lofliedere",
+    language: "Afrikaans",
+    fileName: "afrikaans/afrikaans",
+    refrainLabel: "Refrein",
   },
 ];
