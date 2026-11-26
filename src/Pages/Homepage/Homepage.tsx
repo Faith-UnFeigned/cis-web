@@ -28,13 +28,23 @@ export function Homepage() {
   const savedHymnal = HYMNALS_CONFIG.find(
     (hymnal) => hymnal.key === preferredHymnal,
   );
+  const [lastOpenedHymn] = useLocalStorage<number>({
+    key: "lastOpenedHymn",
+    defaultValue: 1,
+  });
 
   const theme = useMantineTheme();
   const { colorMode } = useColorMode();
 
-  if (savedHymnal) {
-    return <Navigate replace to={`/songs/${savedHymnal.fileName}/1`} />;
-  }
+ if (savedHymnal) {
+  return (
+    <Navigate
+      replace to={`/songs/${savedHymnal.fileName}/${lastOpenedHymn}`}
+    />
+  );
+}
+console.log(lastOpenedHymn);
+
 
   return (
     <div className={styles.container}>
