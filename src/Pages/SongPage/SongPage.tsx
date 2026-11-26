@@ -22,7 +22,18 @@ export default function SongPage() {
     deserialize: (value) => Number(value),
   });
 
+  const [, setLastOpenedHymn] = useLocalStorage<number>({
+    key: "lastOpenedHymn",
+    defaultValue: 1,
+  });
+
   const { number, key } = useParams();
+  useEffect(() => {
+    if (number) {
+      setLastOpenedHymn(Number(number));
+    }
+  }, [number, setLastOpenedHymn]);
+  
   const hymnalConfig = HYMNALS_CONFIG.find((h) => h.key === key?.toLowerCase());
   const { hymns, error, reload, reset } = useHymnal(hymnalConfig);
 
