@@ -9,7 +9,7 @@ import "@mantine/carousel/styles.css";
 import classes from "./PresentationMode.module.scss";
 import { Hymn } from "../../../utils/types";
 import { getVersesList, PresentationSlide } from "./getVersesList";
-import { HYMNALS_CONFIG } from "../../../data/hymnalsConfig";
+import { useHymnalsConfig } from "../../../Context/HymnalsConfig";
 
 export function PresentationMode({
     presenting,
@@ -24,7 +24,7 @@ export function PresentationMode({
     const { ref, fullscreen, toggle } = useFullscreen();
     const [slides, setSlides] = useState<PresentationSlide[]>([]);
 
-    const language = HYMNALS_CONFIG.find((hymnal) => hymnal.key === key);
+    const language = useHymnalsConfig().findHymnal(key);
     const refrainLabel = language?.refrainLabel || "CHORUS";
 
     useEffect(() => {

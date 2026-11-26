@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import SongPage from "./Pages/SongPage/SongPage";
 import { ColorModeProvider, useColorMode } from "./Context/ColorMode";
+import { HymnalsConfigProvider } from "./Context/HymnalsConfig";
 import { Homepage } from "./Pages/Homepage/Homepage";
 import SupportPage from "./Pages/Support/Support";
 import InfoPage from "./Pages/Info/Info";
@@ -14,7 +15,9 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
 function AppWithColorModeProvider() {
   return (
     <ColorModeProvider>
-      <App />
+      <HymnalsConfigProvider>
+        <App />
+      </HymnalsConfigProvider>
     </ColorModeProvider>
   );
 }

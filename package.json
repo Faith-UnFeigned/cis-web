@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:hymnals": "node scripts/sync-hymnals.mjs",
+    "sync:hymnals": "node scripts/sync-hymnals.mjs --write"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",

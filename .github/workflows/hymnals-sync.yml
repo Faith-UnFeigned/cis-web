@@ -1,0 +1,60 @@
+# Checks daily that the bundled fallback hymnal list (src/data/hymnals.json)
+# matches the upstream cis-hymnals repository, and opens (or updates) an issue
+# when it doesn't. The app discovers new hymnals at runtime; this keeps the
+# offline fallback current and catches renamed/removed files early.
+
+name: Check hymnals against upstream
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: hymnals-sync
+  cancel-in-progress: true
+
+env:
+  ISSUE_TITLE: "Hymnal list out of sync with upstream cis-hymnals"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Compare with upstream
+        id: compare
+        run: node scripts/sync-hymnals.mjs
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPORT_FILE: ${{ runner.temp }}/hymnals-report.md
+
+      - name: Open or update issue
+        if: steps.compare.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPORT_FILE: ${{ runner.temp }}/hymnals-report.md
+        run: |
+          # No report means upstream couldn't be reached; fail so it's visible.
+          if [ ! -s "$REPORT_FILE" ]; then
+            echo "::error::Could not compare with upstream (see the 'Compare with upstream' step)."
+            exit 1
+          fi
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$ISSUE_TITLE\" in:title" --json number,title \
+            --jq 'map(select(.title == env.ISSUE_TITLE)) | .[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --repo "$GITHUB_REPOSITORY" --body-file "$REPORT_FILE"
+            echo "Updated issue #$existing"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$ISSUE_TITLE" --body-file "$REPORT_FILE"
+          fi

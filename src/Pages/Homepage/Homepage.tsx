@@ -9,10 +9,8 @@ import {
 } from "@tabler/icons-react";
 
 import styles from "./Homepage.module.scss";
-import {
-  HYMNALS_CONFIG,
-  PREFERRED_HYMNAL_STORAGE_KEY,
-} from "../../data/hymnalsConfig";
+import { PREFERRED_HYMNAL_STORAGE_KEY } from "../../data/hymnalsConfig";
+import { useHymnalsConfig } from "../../Context/HymnalsConfig";
 import { useColorMode } from "../../Context/ColorMode";
 import { Feature } from "./Feature/Feature";
 import { Footer } from "../../Components/Footer/Footer";
@@ -25,9 +23,8 @@ export function Homepage() {
     key: PREFERRED_HYMNAL_STORAGE_KEY,
     defaultValue: "",
   });
-  const savedHymnal = HYMNALS_CONFIG.find(
-    (hymnal) => hymnal.key === preferredHymnal,
-  );
+  const { hymnals, findHymnal } = useHymnalsConfig();
+  const savedHymnal = findHymnal(preferredHymnal);
 
   const theme = useMantineTheme();
   const { colorMode } = useColorMode();
@@ -66,7 +63,7 @@ export function Homepage() {
                 colorMode === "dark" ? "hsl(0, 0%, 16%)" : "hsl(0, 0%, 99%)",
             }}
           >
-            {[...HYMNALS_CONFIG]
+            {[...hymnals]
               .sort((a, b) => (a.title < b.title ? -1 : 1))
               .map((value) => (
                 <Link

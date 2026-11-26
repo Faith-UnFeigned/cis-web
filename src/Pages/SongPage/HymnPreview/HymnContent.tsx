@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { HYMNALS_CONFIG } from "../../../data/hymnalsConfig";
+import { useHymnalsConfig } from "../../../Context/HymnalsConfig";
 import type { Hymn, HymnLyricBlock } from "../../../utils/types";
 import { formatHymnTitle } from "../../../utils/formatHymnTitle";
 
@@ -32,7 +32,7 @@ export function HymnContent({ hymn }: { hymn: Hymn }) {
 
 function LyricBlock({ block }: { block: HymnLyricBlock }) {
   const { key } = useParams();
-  const language = HYMNALS_CONFIG.find((hymnal) => hymnal.key === key);
+  const language = useHymnalsConfig().findHymnal(key);
   const isRefrain = block.type === "refrain";
   const refrainLabel = language?.refrainLabel || "CHORUS";
   const labelText = isRefrain

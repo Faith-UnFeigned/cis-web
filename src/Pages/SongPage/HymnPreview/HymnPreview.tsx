@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import classes from "./HymnPreview.module.css";
 import { NoHymnMessage } from "../ErrorMessages/ErrorMessages";
 import { Hymn } from "../../../utils/types";
-import { HYMNALS_CONFIG } from "../../../data/hymnalsConfig";
+import { useHymnalsConfig } from "../../../Context/HymnalsConfig";
 import { HymnContent } from "./HymnContent";
 
 export default function HymnPreview({
@@ -15,13 +15,12 @@ export default function HymnPreview({
   selectedItem?: Hymn;
   textSize: number;
 }) {
-  const { language } = useParams();
+  const { key } = useParams();
+  const hymnalTitle = useHymnalsConfig().findHymnal(key)?.title;
 
   useDocumentTitle(
-    `${selectedItem?.title} | ${
-      HYMNALS_CONFIG.find((value) => value.key === language)?.title ||
-      "Christ in Song"
-    }` || "Christ in Song on the Web",
+    `${selectedItem?.title} | ${hymnalTitle || "Christ in Song"}` ||
+      "Christ in Song on the Web",
   );
 
   return (
