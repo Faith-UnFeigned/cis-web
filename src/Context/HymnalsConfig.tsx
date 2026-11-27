@@ -1,7 +1,14 @@
 import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { FALLBACK_HYMNALS, fetchUpstreamHymnals, HymnalConfig, normalizeHymnalKey } from "../data/hymnalsConfig";
+import {
+  FALLBACK_HYMNALS,
+  fetchUpstreamHymnals,
+  HymnalConfig,
+  isHymnalConfig,
+  normalizeHymnalKey,
+} from "../data/hymnalsConfig";
 
-const CACHE_STORAGE_KEY = "hymnalsConfigCache";
+// Bump the version when the cached shape changes.
+const CACHE_STORAGE_KEY = "hymnalsConfigCache:v1";
 const CACHE_MAX_AGE_MS = 60 * 60 * 1000;
 
 /**
@@ -26,8 +33,16 @@ function readCache(): CachedHymnals | null {
   try {
     const raw = localStorage.getItem(CACHE_STORAGE_KEY);
     if (!raw) return null;
-    const cached = JSON.parse(raw) as CachedHymnals;
-    return Array.isArray(cached.hymnals) && cached.hymnals.length > 0 ? cached : null;
+    const cached = JSON.parse(raw) as Partial<CachedHymnals> | null;
+    if (
+      typeof cached?.fetchedAt !== "number" ||
+      !Array.isArray(cached.hymnals) ||
+      cached.hymnals.length === 0 ||
+      !cached.hymnals.every(isHymnalConfig)
+    ) {
+      return null;
+    }
+    return { fetchedAt: cached.fetchedAt, hymnals: cached.hymnals };
   } catch {
     return null;
   }
@@ -56,11 +71,14 @@ export function HymnalsConfigProvider({ children }: { children: ReactNode }) {
   );
   const [status, setStatus] = useState<HymnalsStatus>(isCacheFresh ? "cached" : "loading");
   const controllerRef = useRef<AbortController | null>(null);
+  // When the live list was last fetched (or attempted), to refresh it in long-open tabs.
+  const lastFetchRef = useRef(initialCache?.fetchedAt ?? 0);
 
   const load = useCallback(async () => {
     controllerRef.current?.abort();
     const controller = new AbortController();
     controllerRef.current = controller;
+    lastFetchRef.current = Date.now();
     setStatus("loading");
 
     try {
@@ -78,7 +96,19 @@ export function HymnalsConfigProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!isCacheFresh) load();
-    return () => controllerRef.current?.abort();
+
+    // Tabs can stay open for days; refresh a stale list when the tab is shown.
+    const refreshIfStale = () => {
+      if (document.visibilityState === "visible" && Date.now() - lastFetchRef.current >= CACHE_MAX_AGE_MS) {
+        load();
+      }
+    };
+    document.addEventListener("visibilitychange", refreshIfStale);
+
+    return () => {
+      document.removeEventListener("visibilitychange", refreshIfStale);
+      controllerRef.current?.abort();
+    };
   }, [isCacheFresh, load]);
 
   const findHymnal = useCallback(

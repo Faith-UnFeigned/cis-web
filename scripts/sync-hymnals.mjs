@@ -36,6 +36,7 @@ async function fetchUpstream() {
     getJson(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/v2/config.json`),
     getJson(`https://api.github.com/repos/${REPO}/git/trees/${BRANCH}?recursive=1`, headers),
   ]);
+  if (!Array.isArray(config)) throw new Error("Upstream v2/config.json is not a list");
   const paths = tree.tree.map((entry) => entry.path);
   return { config, paths };
 }
@@ -51,6 +52,10 @@ function resolveHymnals(config, paths) {
   const hymnals = [];
   const missingFiles = [];
   for (const entry of config) {
+    if (typeof entry?.key !== "string" || typeof entry.title !== "string" || typeof entry.language !== "string") {
+      missingFiles.push(`(invalid entry: ${JSON.stringify(entry)})`);
+      continue;
+    }
     const fileName = files.get(entry.key.toLowerCase());
     if (!fileName) {
       missingFiles.push(entry.key);
