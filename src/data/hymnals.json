@@ -158,5 +158,19 @@
     "language": "Afrikaans",
     "fileName": "afrikaans/afrikaans",
     "refrainLabel": "Refrein"
+  },
+  {
+    "key": "luganda",
+    "title": "Enyimba Za Kristo",
+    "language": "Luganda",
+    "fileName": "luganda/luganda",
+    "refrainLabel": "CHORUS"
+  },
+  {
+    "key": "silozi",
+    "title": "Kelesite Mwa Lipina",
+    "language": "Silozi",
+    "fileName": "silozi/silozi",
+    "refrainLabel": "Makutelo"
   }
 ]
