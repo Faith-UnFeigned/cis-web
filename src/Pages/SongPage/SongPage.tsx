@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import { IconInfoCircle, IconReload } from "@tabler/icons-react";
 
 import { AppHeader } from "./AppHeader/AppHeader";
-import { HYMNALS_CONFIG } from "../../data/hymnalsConfig";
+import { useHymnalsConfig } from "../../Context/HymnalsConfig";
+import NotFound from "../NotFound/NotFound";
 import { useHymnal } from "../../utils/useHymnal";
 import HymnPreview from "./HymnPreview/HymnPreview";
 import FloatingButtons from "./FloatingButtons/FloatingButtons";
@@ -23,12 +24,24 @@ export default function SongPage() {
   });
 
   const { number, key } = useParams();
-  const hymnalConfig = HYMNALS_CONFIG.find((h) => h.key === key?.toLowerCase());
+  const { findHymnal, status: hymnalsStatus, refresh: refreshHymnals } = useHymnalsConfig();
+  const hymnalConfig = findHymnal(key);
   const { hymns, error, reload, reset } = useHymnal(hymnalConfig);
 
   useEffect(() => {
     document.body.scrollIntoView({ behavior: "smooth" });
   }, [number]);
+
+  // An unknown key may be a hymnal added upstream since the list was cached.
+  useEffect(() => {
+    if (!hymnalConfig && hymnalsStatus === "cached") {
+      refreshHymnals();
+    }
+  }, [hymnalConfig, hymnalsStatus, refreshHymnals]);
+
+  if (!hymnalConfig && (hymnalsStatus === "ready" || hymnalsStatus === "failed")) {
+    return <NotFound />;
+  }
 
   if (!hymns) {
     return error ? (

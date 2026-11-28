@@ -13,10 +13,8 @@ import { IconLanguage } from "@tabler/icons-react";
 import { Link, useParams } from "react-router-dom";
 import { useDisclosure, useLocalStorage } from "@mantine/hooks";
 
-import {
-  HYMNALS_CONFIG,
-  PREFERRED_HYMNAL_STORAGE_KEY,
-} from "../../../data/hymnalsConfig";
+import { PREFERRED_HYMNAL_STORAGE_KEY } from "../../../data/hymnalsConfig";
+import { useHymnalsConfig } from "../../../Context/HymnalsConfig";
 
 export function LanguageSelector({
   selectedItem,
@@ -32,17 +30,19 @@ export function LanguageSelector({
     defaultValue: "",
   });
   const { key } = useParams();
+  const { hymnals, findHymnal } = useHymnalsConfig();
+  const selectedHymnalKey = findHymnal(key)?.key;
 
   const searchRegex = new RegExp(filterText, "i");
 
   const filteredHymnals =
     filterText.trim() !== ""
-      ? HYMNALS_CONFIG.filter(
+      ? hymnals.filter(
           (hymnal) =>
             hymnal.title.match(searchRegex) ||
             hymnal.language.match(searchRegex),
         )
-      : HYMNALS_CONFIG;
+      : hymnals;
 
   return (
     <>
@@ -90,7 +90,7 @@ export function LanguageSelector({
                   }}
                 >
                   <NavLink
-                    active={value.key === key}
+                    active={value.key === selectedHymnalKey}
                     label={value.title}
                     description={value.language}
                   />
